@@ -198,7 +198,7 @@
 </ul>
 <p>假若是使用了 virtualenv 这个虚拟环境，<code>commend</code>的程序执行路径需要填写虚拟环境中的路径，例如<code>/home/wujinwen/.pyenv/versions/envRS/bin/celery</code>。</p>
 <h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>当我们编写好配置文件之后，就可以重启 supervisor 然后启动我们的服务了。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 重启 supervisor</span></span><br><span class="line">supervisorctl reload</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 手动开启我们的 hubot 服务 （正常情况下重启 supervisorctl 就会启动所有允许自动执行的服务了）</span></span><br><span class="line">supervisorctl start hubot</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重启 hubot 的进程</span></span><br><span class="line">supervisorctl restart hubot</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 停止 hubot 的进程</span></span><br><span class="line">supervisorctl stop hubot</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 重启 supervisor</span><br><span class="line">supervisorctl reload</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 手动开启我们的 hubot 服务 （正常情况下重启 supervisorctl 就会启动所有允许自动执行的服务了）</span><br><span class="line">supervisorctl start hubot</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 重启 hubot 的进程</span><br><span class="line">supervisorctl restart hubot</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 停止 hubot 的进程</span><br><span class="line">supervisorctl stop hubot</span><br></pre></td></tr></table></figure>
 <p>当修改了配置之后可以单独重启部分进程生效</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 读取更改后的配置，检查变动及是否存在错误</span></span><br><span class="line">supervisorctl reread</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新配置，重启改动了配置的进程</span></span><br><span class="line">supervisorctl update</span><br></pre></td></tr></table></figure>
 <h3 id="进阶配置与使用-分组"><a href="#进阶配置与使用-分组" class="headerlink" title="进阶配置与使用 - 分组"></a>进阶配置与使用 - 分组</h3><p>分组利于我们管理同一项目的几个进程，在很多情况下好几个进程需要同时进行启动或者关闭操作。有了分组的概念，我们就不需要独单地去启动每一个进程了，可以以分组为单位对进程组启动关闭等操作。</p>
@@ -462,16 +462,6 @@
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <div class="total-archive"> Total : 14 </div>
     
     <div class="post-archive">
@@ -568,6 +558,8 @@
     
         <span class="sidebar-tag-name"><a href="#">Python</a></span>
     
+        <span class="sidebar-tag-name"><a href="#">Django</a></span>
+    
         <span class="sidebar-tag-name"><a href="#">Superset</a></span>
     
         <span class="sidebar-tag-name"><a href="#">数据可视化</a></span>
@@ -576,13 +568,11 @@
     
         <span class="sidebar-tag-name"><a href="#">Supervisor</a></span>
     
-        <span class="sidebar-tag-name"><a href="#">工具脚本</a></span>
-    
         <span class="sidebar-tag-name"><a href="#">pyenv</a></span>
     
         <span class="sidebar-tag-name"><a href="#">virtualenv</a></span>
     
-        <span class="sidebar-tag-name"><a href="#">Django</a></span>
+        <span class="sidebar-tag-name"><a href="#">工具脚本</a></span>
     
         <span class="sidebar-tag-name"><a href="#">iOS</a></span>
     
