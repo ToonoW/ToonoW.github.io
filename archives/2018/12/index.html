@@ -149,46 +149,21 @@
     
     
         <article class="index-post">
-            <a class="content-show-full" href="/2017/09/11/在Druid上受过的伤痛T-T/">
+            <a class="content-show-full" href="/2018/12/16/Celery-Broker-为-AMQP-时-RabbitMQ-上的体现/">
                     <h2 class="abstract-title">
                         
-                        <span>在Druid上受过的伤痛T-T</span>
+                        <span>Celery Broker 为 AMQP 时 RabbitMQ 上的体现详细</span>
                     </h2>
                 <div class="abstract-content">
-                    利用Kafka给Druid导入数据报错Provider io.druid.storage.hdfs.HdfsStorageDruidModule could not be instantiated外行人遇到下面一大段错误让人摸不着头脑，意思好像是说缺少了一些必要的类组件，但是Druid的开发者应该不会在稳定版忘了打包一些部件吧。硬是搜索了大半天的答案，实际上也没什么资料可以搜索到，所以同样的几条翻来覆去地看，最后把每条觉得不太可能成功的答案都尝试了，终于有一个奏效了。
-错误信息如下。
-1234567891011121314151617181920212223242526272829303...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-href="Druid">Druid</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/09/11</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href="/2017/09/08/Superset踩雷日志/">
-                    <h2 class="abstract-title">
-                        
-                        <span>Superset踩雷日志</span>
-                    </h2>
-                <div class="abstract-content">
-                    生成图表时出错unorderable types: str() &gt; int()
-Superset 0.19.1
+                    当 Celery 使用 RabbitMQ 作为 Broker 的时候至少可以提供以下特性：
 
-12345678910111213141516Traceback (most recent call last):  File "/Users/wujinwen/Codes/Python/CRAnalysis/incubator-superset/superset/viz.py", line 253, in get_payload    data = self.get_data(df)  File "/Users/wujinwen/Codes/Python/CRAnal...
+自定义任务队列，worker 订阅指定的任务队列进行消费；
+每一个 worker 订阅所有 worker 的心跳，和每一个 worker 的上下线通知；
+对每一条任务的处理状态进行通知；
+能够对一个或多个 worker 进行开关、worker 所在宿主机状态监控、调整进程数、设置协程数范围、指定队列实时流控、指定队列超时设置；
+对 worker 的控制结果进行获取。
+
+Celery 在使用 RabbitMQ 作为 Broker 的时候，使用了其 exchange queue 的功能，对以上提及的...
                 </div>
             </a>
             <div class="abstract-post-meta">
@@ -198,15 +173,13 @@ Superset 0.19.1
     
         <a class="post-tag" href="javascript:void(0);" data-href="Python">Python</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-href="Superset">Superset</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href="数据可视化">数据可视化</a>
+        <a class="post-tag" href="javascript:void(0);" data-href="Celery">Celery</a>
     
 </div>
                 
                 <!-- date  -->
                 <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/09/08</span>
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/12/16</span>
                 </div>
             </div>
         </article>

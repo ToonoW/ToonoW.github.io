@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>
         
-        快乐的鲸鱼
+        Celery Broker 为 AMQP 时 RabbitMQ 上的体现详细 · 快乐的鲸鱼
         
     </title>
     <link rel="icon" href="/assets/favicon.jpeg">
@@ -50,11 +50,22 @@
     
 </head>
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">快乐的鲸鱼</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Celery Broker 为 AMQP 时 RabbitMQ 上的体现详细</a>
+            </div>
+    </div>
     
     <a class="home-link" href="/">快乐的鲸鱼</a>
 </header>
@@ -62,21 +73,45 @@
         <div class="site-intro">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            Celery Broker 为 AMQP 时 RabbitMQ 上的体现详细
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class="post-intro-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Python">Python</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Celery">Celery</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/12/16</span>
+            </div>
         
     </div>
 </div>
@@ -144,74 +179,117 @@
             }
         </script>
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href="/2017/09/11/在Druid上受过的伤痛T-T/">
-                    <h2 class="abstract-title">
-                        
-                        <span>在Druid上受过的伤痛T-T</span>
-                    </h2>
-                <div class="abstract-content">
-                    利用Kafka给Druid导入数据报错Provider io.druid.storage.hdfs.HdfsStorageDruidModule could not be instantiated外行人遇到下面一大段错误让人摸不着头脑，意思好像是说缺少了一些必要的类组件，但是Druid的开发者应该不会在稳定版忘了打包一些部件吧。硬是搜索了大半天的答案，实际上也没什么资料可以搜索到，所以同样的几条翻来覆去地看，最后把每条觉得不太可能成功的答案都尝试了，终于有一个奏效了。
-错误信息如下。
-1234567891011121314151617181920212223242526272829303...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-href="Druid">Druid</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/09/11</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href="/2017/09/08/Superset踩雷日志/">
-                    <h2 class="abstract-title">
-                        
-                        <span>Superset踩雷日志</span>
-                    </h2>
-                <div class="abstract-content">
-                    生成图表时出错unorderable types: str() &gt; int()
-Superset 0.19.1
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>当 Celery 使用 RabbitMQ 作为 Broker 的时候至少可以提供以下特性：</p>
+<ol>
+<li>自定义任务队列，worker 订阅指定的任务队列进行消费；</li>
+<li>每一个 worker 订阅所有 worker 的心跳，和每一个 worker 的上下线通知；</li>
+<li>对每一条任务的处理状态进行通知；</li>
+<li>能够对一个或多个 worker 进行开关、worker 所在宿主机状态监控、调整进程数、设置协程数范围、指定队列实时流控、指定队列超时设置；</li>
+<li>对 worker 的控制结果进行获取。</li>
+</ol>
+<p>Celery 在使用 RabbitMQ 作为 Broker 的时候，使用了其 <code>exchange</code> <code>queue</code> 的功能，对以上提及的特性进行了实现，具体在 RabbitMQ 上的体现如下表：</p>
+<table>
+<thead>
+<tr>
+<th><strong>Exchange Name</strong></th>
+<th><strong>Exchange Type</strong></th>
+<th><strong>Queue Name</strong></th>
+<th><strong>Routing Key</strong></th>
+<th><strong>Subscriber</strong></th>
+<th><strong>Mean</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>celery</td>
+<td>Direct</td>
+<td>celery</td>
+<td>celery</td>
+<td>all workers</td>
+<td>默认任务队列</td>
+</tr>
+<tr>
+<td>自定义</td>
+<td>Direct</td>
+<td>自定义</td>
+<td>自定义</td>
+<td>all workers</td>
+<td>指定工作队列</td>
+</tr>
+<tr>
+<td>celery.pidbox</td>
+<td>Fanout</td>
+<td>celery@{worker_name}.celery.pidbox</td>
+<td></td>
+<td>per worker</td>
+<td>对 worker 的控制指令</td>
+</tr>
+<tr>
+<td>celeryev</td>
+<td>Topic</td>
+<td>celeryev.{uuid}</td>
+<td>worker.#</td>
+<td>per worker</td>
+<td>worker 状态信息，包括所有 worker 心跳和上下线</td>
+</tr>
+<tr>
+<td>celeryev</td>
+<td>Topic</td>
+<td>celeryev.{uuid}</td>
+<td>#</td>
+<td>monitor</td>
+<td>worker 状态信息和任务处理状态信息</td>
+</tr>
+<tr>
+<td>reply.celery.pidbox</td>
+<td>Direct</td>
+<td>随机生成</td>
+<td>随机生成</td>
+<td>monitor</td>
+<td>对 worker 的控制结果信息</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><strong>Subscriber </strong>为 all worker 代表所有订阅此队列的 worker 都会消费此队列的消息，并且不同 worker 不会重复消费同一条消息；</li>
+<li><strong>Subscriber </strong>为 per worker 代表每个 worker 都会有对应一条队列进行订阅消费；</li>
+<li><strong>Subscriber </strong>为 monitor 代表此队列只有监控程序进行订阅和消费，监控程序例如有 flower；</li>
+<li>reply.celery.pidbox 此 exchange 产生的队列的名称和 routing key 都是由监控程序随机生成的，worker 作为此类队列的生产者，将控制结果发送到队列上，由监控程序进行订阅消费，消费结束后队列自动销毁；<h3 id="worker-的状态信息和任务状态信息的枚举和含义可参照此目录"><a href="#worker-的状态信息和任务状态信息的枚举和含义可参照此目录" class="headerlink" title="worker 的状态信息和任务状态信息的枚举和含义可参照此目录"></a>worker 的状态信息和任务状态信息的枚举和含义可参照此<a href="http://docs.celeryproject.org/en/latest/userguide/monitoring.html#event-reference" target="_blank" rel="noopener">目录</a></h3></li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2018/png/190074/1544000248730-7b2a775a-5ccd-42e9-a525-826547b314cd.png" alt="image.png | left | 448x456"></p>
 
-12345678910111213141516Traceback (most recent call last):  File "/Users/wujinwen/Codes/Python/CRAnalysis/incubator-superset/superset/viz.py", line 253, in get_payload    data = self.get_data(df)  File "/Users/wujinwen/Codes/Python/CRAnal...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class="abstract-tags">
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+        
+            <li class="previous">
+                <a href="/2018/04/08/译-RESTful-API-设计简易最佳实践/" title="译-RESTful" api="" 设计简易最佳实践="">
+                    <span>Previous Post</span>
+                    <span>译-RESTful API 设计简易最佳实践</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
-        <a class="post-tag" href="javascript:void(0);" data-href="Python">Python</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-href="Superset">Superset</a>
+    <script data-isso="http://comment.toonow.cc/" src="http://comment.toonow.cc/js/embed.min.js"></script>
+    <section id="isso-thread"></section>
     
-        <a class="post-tag" href="javascript:void(0);" data-href="数据可视化">数据可视化</a>
+
     
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/09/08</span>
-                </div>
-            </div>
-        </article>
     
-    <!-- paginator  -->
+    <!--PC版-->
+
+    <!--PC版-->
+
+
     
 </main>
             <!-- profile -->
@@ -259,6 +337,13 @@ Superset 0.19.1
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#worker-的状态信息和任务状态信息的枚举和含义可参照此目录"><span class="toc-number">1.</span> <span class="toc-text">worker 的状态信息和任务状态信息的枚举和含义可参照此目录</span></a></li></ol>
+    </div>
     
     <div class="back-top">&#xe639;</div>
     <div class="sidebar">
