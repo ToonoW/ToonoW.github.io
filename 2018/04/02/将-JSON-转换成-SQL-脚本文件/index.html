@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+    <head><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>
+        
+        将 JSON 转换成 SQL 脚本文件 · 快乐的鲸鱼
+        
+    </title>
+    <link rel="icon" href="/assets/favicon.jpeg">
+    <!-- TODO: 在font-face加载完毕后改变字体  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
+    <!-- 提前加载place holder  -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url(/font/Oswald-Regular.ttf);
+        }
+    </style>
+    <style type="text/css">
+        .site-intro-placeholder {
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0px;
+            width: calc(100% + 300px);
+            height: 100%;
+            background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+            background-position: center center;
+            transform: translate3d(-226px, 0, 0);
+            animation: gradient-move 2.5s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+    <link rel="stylesheet" href="/css/style.css?v=20171020">
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">快乐的鲸鱼</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">将 JSON 转换成 SQL 脚本文件</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href="/">快乐的鲸鱼</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            将 JSON 转换成 SQL 脚本文件
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class="post-intro-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Python">Python</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="工具脚本">工具脚本</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/04/02</span>
+            </div>
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            var browser = {
+                    versions: function () {
+                        var u = window.navigator.userAgent;
+                        return {
+                            userAgent: u,
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否为iPad
+                            webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+                            weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+                            uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+                        };
+                    }()
+                }
+
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                        if (postIntroTags) {
+                            postIntroTags.classList.add('post-fade-in');
+                        }
+                        if (postIntroMeat) {
+                            postIntroMeat.classList.add('post-fade-in');
+                        }
+                    }
+                }
+                
+            console.log("userAgent:" + browser.versions.userAgent);
+            // UC不支持跨域，所以直接显示
+            if (browser.versions.uc) {
+                console.log("UCBrowser");
+                fontLoaded();
+            } else {
+                WebFont.load({
+                    custom: {
+                        families: ['Oswald-Regular']
+                    },
+                    loading: function () {  //所有字体开始加载
+                        // console.log('loading');
+                    },
+                    active: function () {  //所有字体已渲染
+                        fontLoaded();
+                    },
+                    inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                        console.log('inactive: timeout');
+                        fontLoaded();
+                    },
+                    timeout: 7000 // Set the timeout to two seconds
+                });
+            }
+        </script>
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>现有单机 MongoDB 爬虫内容库存储网页上获取的内容，最大的 collection 记录条数为47万条数据。为了加速 MongoDB 上内容的使用速度，需要将 MongoDB 上部分字段存储一份到 MySQL 上，建立一个索引表，来达到页数统计和翻页的效果，在结构化数据库也更快速进行关键字段的检索，然后使用对应 MongoDB 的 _id 获取此行更详细的内容。这样来解决 MongoDB 中 collection 过大导致响应过慢的问题。</p>
+<p>一开始的方案是直接编写脚本实时从 MongoDB 取数据，然后实时存入 MySQL。但是在实际操作的过程中会因为 MySQL 连接超时，无法完成数据转移。同时网络速度也不快，不稳定因素太多。之后选择先在 MongoDB 服务器进行部分字段的导出成 JSON 文件，并将 JSON 取回本地用脚本转换成 SQL 脚本的方案。这样子的好处有以下：</p>
+<ul>
+<li>转换结果可见。相比之前的方案，能够看到所有转换完成的 SQL，当插入 MySQL 出错的时候可以定位并查找问题；</li>
+<li>减少网络稳定性的影响；</li>
+<li>处理速度更快。集中完成计算密集型工作，转换工作和网络 I/O 分离。</li>
+</ul>
+<p>脚本依赖 <code>tqdm</code> 和 <code>pymysql</code> 库，需要提前安装。</p>
+<p>下面先直接贴上脚本文件 <code>translate_json_to_sql.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*- </span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> tqdm	<span class="comment"># 可视进度条 https://github.com/tqdm/tqdm</span></span><br><span class="line"><span class="keyword">from</span> pymysql <span class="keyword">import</span> escape_string	<span class="comment"># 对字符串进行转义的函数</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(filename, table_name)</span>:</span></span><br><span class="line">    <span class="comment"># 打开 JSON 文件</span></span><br><span class="line">    <span class="keyword">with</span> open(filename, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            data = json.load(f)</span><br><span class="line">        <span class="keyword">except</span> json.JSONDecodeError:</span><br><span class="line">            print(<span class="string">'非合法JSON文件'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 创建或者覆盖 JSON 文件对应的 SQL 文件</span></span><br><span class="line">            <span class="keyword">with</span> open(filename + <span class="string">'.sql'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f2:</span><br><span class="line">                <span class="comment"># 使用 tqdm 生成器对 JSON 可迭代对象 data 进行迭代和进度反映</span></span><br><span class="line">                <span class="keyword">for</span> item <span class="keyword">in</span> tqdm(data, desc=<span class="string">'转换进度'</span>):</span><br><span class="line">                    sql = <span class="string">"insert into `&#123;&#125;` (`title`, `source`, `source_url`, `image_urls`, `_id`) values ('&#123;&#125;', '&#123;&#125;', '&#123;&#125;', '&#123;&#125;', '&#123;&#125;');\n"</span></span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        <span class="comment"># 写入 SQL 语句到 SQL 文件</span></span><br><span class="line">                        f2.write(sql.format(</span><br><span class="line">                            table_name,</span><br><span class="line">                            escape_string(item[<span class="string">'title'</span>]),</span><br><span class="line">                            escape_string(item[<span class="string">'source'</span>]),</span><br><span class="line">                            escape_string(item[<span class="string">'source_url'</span>]),</span><br><span class="line">                            escape_string(str(item[<span class="string">'image_urls'</span>])),</span><br><span class="line">                            item[<span class="string">'_id'</span>][<span class="string">'$oid'</span>],</span><br><span class="line">                        ))</span><br><span class="line">                    <span class="keyword">except</span> KeyError <span class="keyword">as</span> e:</span><br><span class="line">                        print(e)</span><br><span class="line">                    <span class="keyword">except</span> AttributeError <span class="keyword">as</span> e:</span><br><span class="line">                        print(e)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 传递命令行输入的两个参数 JSON 文件名和数据库表格名称到 main 函数</span></span><br><span class="line">        main(sys.argv[<span class="number">1</span>], sys.argv[<span class="number">2</span>])</span><br><span class="line">    <span class="keyword">except</span> IndexError:</span><br><span class="line">        logging.error(<span class="string">'缺少参数。需要提供json文件名及数据库表格名称。'</span>)</span><br></pre></td></tr></table></figure>
+<p>在使用的时候输入命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python translate_json_to_sql.py json文件名 对应的sql表格名称</span><br></pre></td></tr></table></figure>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href="/2018/04/08/译-RESTful-API-设计简易最佳实践/" title="译-RESTful" api="" 设计简易最佳实践="">
+                    <span>Next Post</span>
+                    <span>译-RESTful API 设计简易最佳实践</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href="/2018/02/05/jupyter结合virtualenv使用/" title="jupyter" 结合="" virtualenv="" 使用，增加="" kernel="">
+                    <span>Previous Post</span>
+                    <span>jupyter 结合 virtualenv 使用，增加 kernel</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <script data-isso="http://comment.toonow.cc/" src="http://comment.toonow.cc/js/embed.min.js"></script>
+    <section id="isso-thread"></section>
+    
+
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:toono@qq.com" class="iconfont-archer email" title="email"></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/ToonoW" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="//twitter.com/toono_w" class="iconfont-archer twitter" target="_blank" title="twitter"></a>
+            
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        
+    </div>
+    
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header sidebar-header-show-archive">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 14 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span><a class="archive-post-title" href="/2018/04/08/译-RESTful-API-设计简易最佳实践/">译-RESTful API 设计简易最佳实践</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/02</span><a class="archive-post-title" href="/2018/04/02/将-JSON-转换成-SQL-脚本文件/">将 JSON 转换成 SQL 脚本文件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href="/2018/02/05/jupyter结合virtualenv使用/">jupyter 结合 virtualenv 使用，增加 kernel</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/06</span><a class="archive-post-title" href="/2018/01/06/linux命令记录/">linux命令记录</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/04</span><a class="archive-post-title" href="/2017/12/04/现有Django项目迁移到2-0版本/">译 - 现有 Django 项目迁移到新版本</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/13</span><a class="archive-post-title" href="/2017/11/13/拥抱pyenv-virtualenv-减少机械重复/">拥抱pyenv+virtualenv, 减少机械重复</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/08</span><a class="archive-post-title" href="/2017/11/08/Supervisor-Linux进程管理/">Supervisor: Linux进程管理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/27</span><a class="archive-post-title" href="/2017/10/27/Django集成全文检索/">Django集成全文检索</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/11</span><a class="archive-post-title" href="/2017/09/11/在Druid上受过的伤痛T-T/">在Druid上受过的伤痛T-T</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/08</span><a class="archive-post-title" href="/2017/09/08/Superset踩雷日志/">Superset踩雷日志</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/26</span><a class="archive-post-title" href="/2017/08/26/踩过才知道的Django坑/">踩过才知道的Django坑</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/17</span><a class="archive-post-title" href="/2017/08/17/比之前更加轻松的爬虫实践/">比之前更加轻松的爬虫实践</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/11</span><a class="archive-post-title" href="/2017/02/11/译-UITableViewCell中嵌套/">译-UITableViewCell中嵌套</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/12</span><a class="archive-post-title" href="/2017/01/12/译-Python多线程socket代码实战/">译-Python多线程socket代码实战</a>
+        </li>
+    
+    </ul></div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href="#">Superset</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Python</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">数据可视化</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Django</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Linux</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Supervisor</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">工具脚本</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">pyenv</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">virtualenv</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">iOS</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Druid</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">爬虫</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Scrapy</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">RESTful</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Socket</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br>
+    1、请确保node版本大于6.2<br>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+

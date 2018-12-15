@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+    <head><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>
+        
+        在Druid上受过的伤痛T-T · 快乐的鲸鱼
+        
+    </title>
+    <link rel="icon" href="/assets/favicon.jpeg">
+    <!-- TODO: 在font-face加载完毕后改变字体  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
+    <!-- 提前加载place holder  -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url(/font/Oswald-Regular.ttf);
+        }
+    </style>
+    <style type="text/css">
+        .site-intro-placeholder {
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0px;
+            width: calc(100% + 300px);
+            height: 100%;
+            background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+            background-position: center center;
+            transform: translate3d(-226px, 0, 0);
+            animation: gradient-move 2.5s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+    <link rel="stylesheet" href="/css/style.css?v=20171020">
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">快乐的鲸鱼</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">在Druid上受过的伤痛T-T</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href="/">快乐的鲸鱼</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            在Druid上受过的伤痛T-T
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class="post-intro-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Druid">Druid</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/09/11</span>
+            </div>
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            var browser = {
+                    versions: function () {
+                        var u = window.navigator.userAgent;
+                        return {
+                            userAgent: u,
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否为iPad
+                            webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+                            weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+                            uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+                        };
+                    }()
+                }
+
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                        if (postIntroTags) {
+                            postIntroTags.classList.add('post-fade-in');
+                        }
+                        if (postIntroMeat) {
+                            postIntroMeat.classList.add('post-fade-in');
+                        }
+                    }
+                }
+                
+            console.log("userAgent:" + browser.versions.userAgent);
+            // UC不支持跨域，所以直接显示
+            if (browser.versions.uc) {
+                console.log("UCBrowser");
+                fontLoaded();
+            } else {
+                WebFont.load({
+                    custom: {
+                        families: ['Oswald-Regular']
+                    },
+                    loading: function () {  //所有字体开始加载
+                        // console.log('loading');
+                    },
+                    active: function () {  //所有字体已渲染
+                        fontLoaded();
+                    },
+                    inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                        console.log('inactive: timeout');
+                        fontLoaded();
+                    },
+                    timeout: 7000 // Set the timeout to two seconds
+                });
+            }
+        </script>
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="利用Kafka给Druid导入数据报错Provider-io-druid-storage-hdfs-HdfsStorageDruidModule-could-not-be-instantiated"><a href="#利用Kafka给Druid导入数据报错Provider-io-druid-storage-hdfs-HdfsStorageDruidModule-could-not-be-instantiated" class="headerlink" title="利用Kafka给Druid导入数据报错Provider io.druid.storage.hdfs.HdfsStorageDruidModule could not be instantiated"></a>利用Kafka给Druid导入数据报错<code>Provider io.druid.storage.hdfs.HdfsStorageDruidModule could not be instantiated</code></h2><p>外行人遇到下面一大段错误让人摸不着头脑，意思好像是说缺少了一些必要的类组件，但是Druid的开发者应该不会在稳定版忘了打包一些部件吧。硬是搜索了大半天的答案，实际上也没什么资料可以搜索到，所以同样的几条翻来覆去地看，最后把每条觉得不太可能成功的答案都尝试了，终于有一个奏效了。</p>
+<p>错误信息如下。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line">2017-09-11 18:33:59,833 [KafkaConsumer-1] ERROR c.m.tranquility.kafka.KafkaConsumer - Exception:</span><br><span class="line">java.util.ServiceConfigurationError: io.druid.initialization.DruidModule: Provider io.druid.storage.hdfs.HdfsStorageDruidModule could not be instantiated</span><br><span class="line">	at java.util.ServiceLoader.fail(ServiceLoader.java:232) ~[na:1.8.0_111]</span><br><span class="line">	at java.util.ServiceLoader.access$100(ServiceLoader.java:185) ~[na:1.8.0_111]</span><br><span class="line">	at java.util.ServiceLoader$LazyIterator.nextService(ServiceLoader.java:384) ~[na:1.8.0_111]</span><br><span class="line">	at java.util.ServiceLoader$LazyIterator.next(ServiceLoader.java:404) ~[na:1.8.0_111]</span><br><span class="line">	at java.util.ServiceLoader$1.next(ServiceLoader.java:480) ~[na:1.8.0_111]</span><br><span class="line">	at io.druid.initialization.Initialization.getFromExtensions(Initialization.java:157) ~[io.druid.druid-server-0.9.1.jar:0.9.1]</span><br><span class="line">	at com.metamx.tranquility.druid.DruidGuicer.&lt;init&gt;(DruidGuicer.scala:124) ~[io.druid.tranquility-core-0.8.2.jar:0.8.2]</span><br><span class="line">	at com.metamx.tranquility.druid.DruidGuicer$.&lt;init&gt;(DruidGuicer.scala:138) ~[io.druid.tranquility-core-0.8.2.jar:0.8.2]</span><br><span class="line">	at com.metamx.tranquility.druid.DruidGuicer$.&lt;clinit&gt;(DruidGuicer.scala) ~[io.druid.tranquility-core-0.8.2.jar:0.8.2]</span><br><span class="line">	at com.metamx.tranquility.druid.DruidBeams$.makeFireDepartment(DruidBeams.scala:433) ~[io.druid.tranquility-core-0.8.2.jar:0.8.2]</span><br><span class="line">	at com.metamx.tranquility.druid.DruidBeams$.fromConfigInternal(DruidBeams.scala:299) ~[io.druid.tranquility-core-0.8.2.jar:0.8.2]</span><br><span class="line">	at com.metamx.tranquility.druid.DruidBeams$.fromConfig(DruidBeams.scala:204) ~[io.druid.tranquility-core-0.8.2.jar:0.8.2]</span><br><span class="line">	at com.metamx.tranquility.kafka.KafkaBeamUtils$.createTranquilizer(KafkaBeamUtils.scala:40) ~[io.druid.tranquility-kafka-0.8.2.jar:0.8.2]</span><br><span class="line">	at com.metamx.tranquility.kafka.KafkaBeamUtils.createTranquilizer(KafkaBeamUtils.scala) ~[io.druid.tranquility-kafka-0.8.2.jar:0.8.2]</span><br><span class="line">	at com.metamx.tranquility.kafka.writer.TranquilityEventWriter.&lt;init&gt;(TranquilityEventWriter.java:64) ~[io.druid.tranquility-kafka-0.8.2.jar:0.8.2]</span><br><span class="line">	at com.metamx.tranquility.kafka.writer.WriterController.createWriter(WriterController.java:171) ~[io.druid.tranquility-kafka-0.8.2.jar:0.8.2]</span><br><span class="line">	at com.metamx.tranquility.kafka.writer.WriterController.getWriter(WriterController.java:98) ~[io.druid.tranquility-kafka-0.8.2.jar:0.8.2]</span><br><span class="line">	at com.metamx.tranquility.kafka.KafkaConsumer$2.run(KafkaConsumer.java:231) ~[io.druid.tranquility-kafka-0.8.2.jar:0.8.2]</span><br><span class="line">	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [na:1.8.0_111]</span><br><span class="line">	at java.util.concurrent.FutureTask.run(FutureTask.java:266) [na:1.8.0_111]</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142) [na:1.8.0_111]</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617) [na:1.8.0_111]</span><br><span class="line">	at java.lang.Thread.run(Thread.java:745) [na:1.8.0_111]</span><br><span class="line">Caused by: java.lang.NoClassDefFoundError: io/druid/java/util/common/logger/Logger</span><br><span class="line">	at io.druid.storage.hdfs.HdfsStorageDruidModule.&lt;clinit&gt;(HdfsStorageDruidModule.java:51) ~[na:na]</span><br><span class="line">	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_111]</span><br><span class="line">	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_111]</span><br><span class="line">	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[na:1.8.0_111]</span><br><span class="line">	at java.lang.reflect.Constructor.newInstance(Constructor.java:423) ~[na:1.8.0_111]</span><br><span class="line">	at java.lang.Class.newInstance(Class.java:442) ~[na:1.8.0_111]</span><br><span class="line">	at java.util.ServiceLoader$LazyIterator.nextService(ServiceLoader.java:380) ~[na:1.8.0_111]</span><br><span class="line">	... 20 common frames omitted</span><br><span class="line">Caused by: java.lang.ClassNotFoundException: io.druid.java.util.common.logger.Logger</span><br><span class="line">	at java.net.URLClassLoader.findClass(URLClassLoader.java:381) ~[na:1.8.0_111]</span><br><span class="line">	at java.lang.ClassLoader.loadClass(ClassLoader.java:424) ~[na:1.8.0_111]</span><br><span class="line">	at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ~[na:1.8.0_111]</span><br><span class="line">	... 27 common frames omitted</span><br><span class="line">2017-09-11 18:33:59,835 [KafkaConsumer-1] INFO  c.m.tranquility.kafka.KafkaConsumer - Shutting down - attempting to flush buffers and commit final offsets</span><br><span class="line">2017-09-11 18:33:59,836 [Curator-Framework-0] INFO  o.a.c.f.imps.CuratorFrameworkImpl - backgroundOperationsLoop exiting</span><br><span class="line">2017-09-11 18:33:59,851 [KafkaConsumer-1] INFO  org.apache.zookeeper.ZooKeeper - Session: 0x15e71a1da94001e closed</span><br><span class="line">2017-09-11 18:33:59,852 [KafkaConsumer-1-EventThread] INFO  org.apache.zookeeper.ClientCnxn - EventThread shut down for session: 0x15e71a1da94001e</span><br><span class="line">2017-09-11 18:33:59,864 [KafkaConsumer-1] INFO  k.c.ZookeeperConsumerConnector - [tranquility-kafka_localhost.localdomain-1505154826384-a1e5698a], ZKConsumerConnector shutting down</span><br><span class="line">2017-09-11 18:33:59,880 [KafkaConsumer-1] INFO  k.c.ZookeeperTopicEventWatcher - Shutting down topic event watcher.</span><br><span class="line">2017-09-11 18:33:59,880 [KafkaConsumer-1] INFO  k.consumer.ConsumerFetcherManager - [ConsumerFetcherManager-1505154826568] Stopping leader finder thread</span><br><span class="line">2017-09-11 18:33:59,881 [KafkaConsumer-1] INFO  k.c.ConsumerFetcherManager$LeaderFinderThread - [tranquility-kafka_localhost.localdomain-1505154826384-a1e5698a-leader-finder-thread], Shutting down</span><br><span class="line">2017-09-11 18:33:59,886 [tranquility-kafka_localhost.localdomain-1505154826384-a1e5698a-leader-finder-thread] INFO  k.c.ConsumerFetcherManager$LeaderFinderThread - [tranquility-kafka_localhost.localdomain-1505154826384-a1e5698a-leader-finder-thread], Stopped</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>最终找到的<a href="https://groups.google.com/forum/#!topic/druid-user/y43-b1z3c3E" target="_blank" rel="noopener">答案</a>，里面说原因是加载了会引起错误的拓展。然后我们指定拓展外空，就可以避免错误了。</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fjfrno6ypij31gg0f4ad3.jpg" alt=""></p>
+<p>所以我们在命令最后加上参数<code>-Ddruid.extensions.loadList=[]</code>即可。</p>
+<p>完整命令：</p>
+<p><code>./tranquility-distribution-0.8.2/bin/tranquility kafka -configFile conf-quickstart/tranquility/kafka.json -Ddruid.extensions.loadList=[]</code></p>
+<p>​        </p>
+<h2 id="确认Kafka运行正常的情况下Message被Dropped"><a href="#确认Kafka运行正常的情况下Message被Dropped" class="headerlink" title="确认Kafka运行正常的情况下Message被Dropped"></a>确认Kafka运行正常的情况下Message被Dropped</h2><p>我是使用tranquility配合kafka进行数据流导入Druid。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2017-09-12 08:41:49,603 [KafkaConsumer-CommitThread] INFO  c.m.tranquility.kafka.KafkaConsumer - Flushed &#123;crlog=&#123;receivedCount=1, sentCount=1, droppedCount=0, unparseableCount=0&#125;&#125; pending messages in 1ms and committed offsets in 0ms.</span><br></pre></td></tr></table></figure>
+<p>首先以上是一条理想情况的日志信息<code>receivedCount</code>等于<code>sentCount</code>，也就是消费者tranquility接收到的消息全部成功解析并且成功发送给Druid。</p>
+<p>如果出现<code>unparseableCount</code>不为0的情况，那么就是你发过来的字符串无法解析为对应的数据格式（我选用的是json）。在正常情况下，我们的内容发送给kafka之前是需要经过编码的（我选用utf-8）。所以确保你发送的是经过编码，而且可以被解析成json的字符串。</p>
+<p>如果出现<code>droppedCount</code>，那么就是解析出来的内容不合法了，情况很多种。我这里说我遇到的一种，是时间窗问题不在时间窗内的将会被dropped。还有那就是服务器时间问题。请确保服务器和开发机时间一致，并且是ISO8601格式的时间（2017-09-12T08:59:03Z）。这会影响EVENT是否在时间窗内。</p>
+<p>下面再贴上我的项目用到的tranquility配置，以供参考。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"dataSources"</span> : &#123;</span><br><span class="line">    <span class="attr">"crlog-kafka"</span> : &#123;</span><br><span class="line">      <span class="attr">"spec"</span> : &#123;</span><br><span class="line">        <span class="attr">"dataSchema"</span> : &#123;</span><br><span class="line">          <span class="attr">"dataSource"</span> : <span class="string">"crlog-kafka"</span>,</span><br><span class="line">          <span class="attr">"parser"</span> : &#123;</span><br><span class="line">            <span class="attr">"type"</span> : <span class="string">"string"</span>,</span><br><span class="line">            <span class="attr">"parseSpec"</span> : &#123;</span><br><span class="line">              <span class="attr">"timestampSpec"</span> : &#123;</span><br><span class="line">                <span class="attr">"column"</span> : <span class="string">"datetime"</span>,</span><br><span class="line">                <span class="attr">"format"</span> : <span class="string">"auto"</span></span><br><span class="line">              &#125;,</span><br><span class="line">              <span class="attr">"dimensionsSpec"</span> : &#123;</span><br><span class="line">                <span class="attr">"dimensions"</span> : [<span class="string">"product_name"</span>, <span class="string">"event_name"</span>, <span class="string">"event"</span>, <span class="string">"username"</span>, <span class="string">"dept"</span>, <span class="string">"hospital"</span>, <span class="string">"job_title"</span>],</span><br><span class="line">                <span class="attr">"dimensionExclusions"</span> : []</span><br><span class="line">              &#125;,</span><br><span class="line">              <span class="attr">"format"</span> : <span class="string">"json"</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="attr">"granularitySpec"</span> : &#123;</span><br><span class="line">            <span class="attr">"type"</span> : <span class="string">"uniform"</span>,</span><br><span class="line">            <span class="attr">"segmentGranularity"</span> : <span class="string">"hour"</span>,</span><br><span class="line">            <span class="attr">"queryGranularity"</span> : <span class="string">"none"</span></span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="attr">"metricsSpec"</span> : [</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="attr">"fieldName"</span> : <span class="string">"spent_time"</span>,</span><br><span class="line">              <span class="attr">"name"</span> : <span class="string">"spent_time"</span>,</span><br><span class="line">              <span class="attr">"type"</span> : <span class="string">"longSum"</span></span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"ioConfig"</span> : &#123;</span><br><span class="line">          <span class="attr">"type"</span> : <span class="string">"realtime"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"tuningConfig"</span> : &#123;</span><br><span class="line">          <span class="attr">"type"</span> : <span class="string">"realtime"</span>,</span><br><span class="line">          <span class="attr">"maxRowsInMemory"</span> : <span class="string">"100000"</span>,</span><br><span class="line">          <span class="attr">"intermediatePersistPeriod"</span> : <span class="string">"PT10M"</span>,</span><br><span class="line">          <span class="attr">"windowPeriod"</span> : <span class="string">"PT10M"</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"properties"</span> : &#123;</span><br><span class="line">        <span class="attr">"task.partitions"</span> : <span class="string">"1"</span>,</span><br><span class="line">        <span class="attr">"task.replicants"</span> : <span class="string">"1"</span>,</span><br><span class="line">        <span class="attr">"topicPattern"</span> : <span class="string">"crlog"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"properties"</span> : &#123;</span><br><span class="line">    <span class="attr">"zookeeper.connect"</span> : <span class="string">"192.168.1.4"</span>,</span><br><span class="line">    <span class="attr">"druid.discovery.curator.path"</span> : <span class="string">"/druid/discovery"</span>,</span><br><span class="line">    <span class="attr">"druid.selectors.indexing.serviceName"</span> : <span class="string">"druid/overlord"</span>,</span><br><span class="line">    <span class="attr">"commit.periodMillis"</span> : <span class="string">"15000"</span>,</span><br><span class="line">    <span class="attr">"consumer.numThreads"</span> : <span class="string">"2"</span>,</span><br><span class="line">    <span class="attr">"kafka.zookeeper.connect"</span> : <span class="string">"192.168.1.4"</span>,</span><br><span class="line">    <span class="attr">"kafka.group.id"</span> : <span class="string">"tranquility-kafka"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="修改-Tranquility-配置中的-intermediatePersistPeriod-导致-Indexing-Service-中任务过多"><a href="#修改-Tranquility-配置中的-intermediatePersistPeriod-导致-Indexing-Service-中任务过多" class="headerlink" title="修改 Tranquility 配置中的 intermediatePersistPeriod 导致 Indexing Service 中任务过多"></a>修改 Tranquility 配置中的 intermediatePersistPeriod 导致 Indexing Service 中任务过多</h2><p>在配置文件的 tuningConfig 部分有关于时间窗口和存盘时间间隔的设置，我在试验性使用 Tranquility 进行实时数据的摄入的时候将时间窗口 windowPeriod 设置为 <code>PT10H</code> ，使其窗口接受十小时以内的数据。但是我也在不知道 intermediatePersistPeriod 含义的情况下，同样将其改为 <code>PT10H</code>，导致了 Indexing Service 中任务过多的情况。如下图：<img src="https://ws3.sinaimg.cn/large/006tNc79gy1flqzvsn8tkj31kw0wj486.jpg" alt=""></p>
+<p>所以 intermediatePersistPeriod 属于优化用的配置，刚接触的情况下不建议修改。</p>
+<h3 id="相关"><a href="#相关" class="headerlink" title="相关"></a>相关</h3><p>以上的说明中， <code>PT10H</code> 是<a href="https://en.wikipedia.org/wiki/ISO_8601#Durations" target="_blank" rel="noopener"> ISO8601 规范</a>中定义的格式。</p>
+<h2 id="时区设置"><a href="#时区设置" class="headerlink" title="时区设置"></a>时区设置</h2><p>Druid 的时间默认是 UTC 事件，我们需要设置相应的时区才能按照我们当地的时间运行。否则就会出现一些因为需要导入的记录的时间戳不在时间窗口内而被丢弃的问题。所以遇到 droped 的问题，一定要检查时间的因素。</p>
+<p>Druid 的配置文件在 <code>conf</code> 目录的各组件子目录下，需要修改的是 <code>jvm.config</code>文件，<code>conf</code> 下的目录结构如下，每个文件都需要改，否则时间不统一。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">druid/</span><br><span class="line">├── broker</span><br><span class="line">│   ├── jvm.config</span><br><span class="line">│   └── runtime.properties</span><br><span class="line">├── _common</span><br><span class="line">│   ├── common.runtime.properties</span><br><span class="line">│   └── log4j2.xml</span><br><span class="line">├── coordinator</span><br><span class="line">│   ├── jvm.config</span><br><span class="line">│   └── runtime.properties</span><br><span class="line">├── historical</span><br><span class="line">│   ├── jvm.config</span><br><span class="line">│   └── runtime.properties</span><br><span class="line">├── middleManager</span><br><span class="line">│   ├── jvm.config</span><br><span class="line">│   └── runtime.properties</span><br><span class="line">└── overlord</span><br><span class="line">    ├── jvm.config</span><br><span class="line">    └── runtime.properties</span><br></pre></td></tr></table></figure>
+<p>我们需要将 <code>-Duser.timezone=UTC</code> 改为 <code>-Duser.timezone=UTC+0800</code>  。同时需要修改 <code>tranquility/conf/application.ini</code> 文件的 <code>-J-Duser.timezone=UTC</code> 为 <code>-J-Duser.timezone=UTC+0800</code> 。这样子就时间统一了。</p>
+<h2 id="各节点的默认端口"><a href="#各节点的默认端口" class="headerlink" title="各节点的默认端口"></a>各节点的默认端口</h2><ul>
+<li>Overlord - 8090</li>
+<li>Historical - 8083</li>
+<li>Coordinator - 8081</li>
+<li>MiddleManager - 8091</li>
+<li>Broker - 8082</li>
+</ul>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href="/2017/10/27/Django集成全文检索/" title="Django集成全文检索">
+                    <span>Next Post</span>
+                    <span>Django集成全文检索</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href="/2017/09/08/Superset踩雷日志/" title="Superset踩雷日志">
+                    <span>Previous Post</span>
+                    <span>Superset踩雷日志</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <script data-isso="http://comment.toonow.cc/" src="http://comment.toonow.cc/js/embed.min.js"></script>
+    <section id="isso-thread"></section>
+    
+
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:toono@qq.com" class="iconfont-archer email" title="email"></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/ToonoW" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="//twitter.com/toono_w" class="iconfont-archer twitter" target="_blank" title="twitter"></a>
+            
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#利用Kafka给Druid导入数据报错Provider-io-druid-storage-hdfs-HdfsStorageDruidModule-could-not-be-instantiated"><span class="toc-number">1.</span> <span class="toc-text">利用Kafka给Druid导入数据报错Provider io.druid.storage.hdfs.HdfsStorageDruidModule could not be instantiated</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#确认Kafka运行正常的情况下Message被Dropped"><span class="toc-number">2.</span> <span class="toc-text">确认Kafka运行正常的情况下Message被Dropped</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改-Tranquility-配置中的-intermediatePersistPeriod-导致-Indexing-Service-中任务过多"><span class="toc-number">3.</span> <span class="toc-text">修改 Tranquility 配置中的 intermediatePersistPeriod 导致 Indexing Service 中任务过多</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相关"><span class="toc-number">3.1.</span> <span class="toc-text">相关</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#时区设置"><span class="toc-number">4.</span> <span class="toc-text">时区设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#各节点的默认端口"><span class="toc-number">5.</span> <span class="toc-text">各节点的默认端口</span></a></li></ol>
+    </div>
+    
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header sidebar-header-show-archive">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 14 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span><a class="archive-post-title" href="/2018/04/08/译-RESTful-API-设计简易最佳实践/">译-RESTful API 设计简易最佳实践</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/02</span><a class="archive-post-title" href="/2018/04/02/将-JSON-转换成-SQL-脚本文件/">将 JSON 转换成 SQL 脚本文件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href="/2018/02/05/jupyter结合virtualenv使用/">jupyter 结合 virtualenv 使用，增加 kernel</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/06</span><a class="archive-post-title" href="/2018/01/06/linux命令记录/">linux命令记录</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/04</span><a class="archive-post-title" href="/2017/12/04/现有Django项目迁移到2-0版本/">译 - 现有 Django 项目迁移到新版本</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/13</span><a class="archive-post-title" href="/2017/11/13/拥抱pyenv-virtualenv-减少机械重复/">拥抱pyenv+virtualenv, 减少机械重复</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/08</span><a class="archive-post-title" href="/2017/11/08/Supervisor-Linux进程管理/">Supervisor: Linux进程管理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/27</span><a class="archive-post-title" href="/2017/10/27/Django集成全文检索/">Django集成全文检索</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/11</span><a class="archive-post-title" href="/2017/09/11/在Druid上受过的伤痛T-T/">在Druid上受过的伤痛T-T</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/08</span><a class="archive-post-title" href="/2017/09/08/Superset踩雷日志/">Superset踩雷日志</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/26</span><a class="archive-post-title" href="/2017/08/26/踩过才知道的Django坑/">踩过才知道的Django坑</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/17</span><a class="archive-post-title" href="/2017/08/17/比之前更加轻松的爬虫实践/">比之前更加轻松的爬虫实践</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/11</span><a class="archive-post-title" href="/2017/02/11/译-UITableViewCell中嵌套/">译-UITableViewCell中嵌套</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/12</span><a class="archive-post-title" href="/2017/01/12/译-Python多线程socket代码实战/">译-Python多线程socket代码实战</a>
+        </li>
+    
+    </ul></div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href="#">Superset</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Python</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">数据可视化</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Django</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Linux</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Supervisor</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">工具脚本</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">pyenv</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">virtualenv</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">iOS</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Druid</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">爬虫</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Scrapy</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">RESTful</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Socket</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br>
+    1、请确保node版本大于6.2<br>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+

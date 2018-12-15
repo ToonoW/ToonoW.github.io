@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+    <head><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>
+        
+        Supervisor: Linux进程管理 · 快乐的鲸鱼
+        
+    </title>
+    <link rel="icon" href="/assets/favicon.jpeg">
+    <!-- TODO: 在font-face加载完毕后改变字体  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
+    <!-- 提前加载place holder  -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url(/font/Oswald-Regular.ttf);
+        }
+    </style>
+    <style type="text/css">
+        .site-intro-placeholder {
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0px;
+            width: calc(100% + 300px);
+            height: 100%;
+            background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+            background-position: center center;
+            transform: translate3d(-226px, 0, 0);
+            animation: gradient-move 2.5s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+    <link rel="stylesheet" href="/css/style.css?v=20171020">
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">快乐的鲸鱼</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Supervisor: Linux进程管理</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href="/">快乐的鲸鱼</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            Supervisor: Linux进程管理
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class="post-intro-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Linux">Linux</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Supervisor">Supervisor</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/11/08</span>
+            </div>
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            var browser = {
+                    versions: function () {
+                        var u = window.navigator.userAgent;
+                        return {
+                            userAgent: u,
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否为iPad
+                            webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+                            weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+                            uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+                        };
+                    }()
+                }
+
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                        if (postIntroTags) {
+                            postIntroTags.classList.add('post-fade-in');
+                        }
+                        if (postIntroMeat) {
+                            postIntroMeat.classList.add('post-fade-in');
+                        }
+                    }
+                }
+                
+            console.log("userAgent:" + browser.versions.userAgent);
+            // UC不支持跨域，所以直接显示
+            if (browser.versions.uc) {
+                console.log("UCBrowser");
+                fontLoaded();
+            } else {
+                WebFont.load({
+                    custom: {
+                        families: ['Oswald-Regular']
+                    },
+                    loading: function () {  //所有字体开始加载
+                        // console.log('loading');
+                    },
+                    active: function () {  //所有字体已渲染
+                        fontLoaded();
+                    },
+                    inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                        console.log('inactive: timeout');
+                        fontLoaded();
+                    },
+                    timeout: 7000 // Set the timeout to two seconds
+                });
+            }
+        </script>
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p><a href="http://www.supervisord.org/" target="_blank" rel="noopener">Supervisor</a> 是 Python 实现的成熟度的进程管理工具。方便启动关闭非后台运行的服务，并且服务程序意外退出的时候自动重启服务程序。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>Centos</p>
+<p><code>sudo yum install supervisor</code></p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>软件的总配置在<code>/etc/supervisord.conf</code>，每个进程的配置文件都可以拆分开，放在<code>/etc/supervisord.d</code>目录下，注意需要是<code>.ini</code>后缀名。</p>
+<p>假设我们编写一个 hubot 的配置文件，在<code>/etc/supervisord.d</code>目录下创建文件<code>hubot.ini</code>。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[program:hubot]</span></span><br><span class="line"><span class="attr">command</span>=/home/wujinwen/hubot/bin/hubot --adapter slack</span><br><span class="line"><span class="attr">environment</span>=HUBOT_SLACK_TOKEN=xoxb-<span class="number">2324175</span>,HUBOT_SLACK_RTM_CLIENT_OPTS=<span class="string">'&#123; "retryConfig": &#123; "retries": 20 &#125; &#125;'</span></span><br><span class="line"><span class="attr">directory</span>=/home/wujinwen/hubot</span><br><span class="line"><span class="attr">user</span>=root</span><br><span class="line"><span class="attr">stdout_logfile</span>=/home/wujinwen/hubot/log/hubot.log</span><br><span class="line"><span class="attr">redirect_stderr</span>=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>进程 hubot 的名字定义在 <code>[program:hubot]</code>里。</p>
+<ul>
+<li><code>command</code> 是启动 hubot 的命令；</li>
+<li><code>environment</code>是环境变量的设置；</li>
+<li><code>directory</code>是进程的当前目录；</li>
+<li><code>stdout_logfile</code>是输出日志存放的路径；</li>
+<li><code>redirect_stderr</code>是设置是否将错误信息直接输出到日志文件中；</li>
+<li><code>user</code>是运行进程的用户。</li>
+</ul>
+<p>假若是使用了 virtualenv 这个虚拟环境，<code>commend</code>的程序执行路径需要填写虚拟环境中的路径，例如<code>/home/wujinwen/.pyenv/versions/envRS/bin/celery</code>。</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>当我们编写好配置文件之后，就可以重启 supervisor 然后启动我们的服务了。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 重启 supervisor</span></span><br><span class="line">supervisorctl reload</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 手动开启我们的 hubot 服务 （正常情况下重启 supervisorctl 就会启动所有允许自动执行的服务了）</span></span><br><span class="line">supervisorctl start hubot</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重启 hubot 的进程</span></span><br><span class="line">supervisorctl restart hubot</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 停止 hubot 的进程</span></span><br><span class="line">supervisorctl stop hubot</span><br></pre></td></tr></table></figure>
+<p>当修改了配置之后可以单独重启部分进程生效</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 读取更改后的配置，检查变动及是否存在错误</span></span><br><span class="line">supervisorctl reread</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新配置，重启改动了配置的进程</span></span><br><span class="line">supervisorctl update</span><br></pre></td></tr></table></figure>
+<h3 id="进阶配置与使用-分组"><a href="#进阶配置与使用-分组" class="headerlink" title="进阶配置与使用 - 分组"></a>进阶配置与使用 - 分组</h3><p>分组利于我们管理同一项目的几个进程，在很多情况下好几个进程需要同时进行启动或者关闭操作。有了分组的概念，我们就不需要独单地去启动每一个进程了，可以以分组为单位对进程组启动关闭等操作。</p>
+<p>这里粘贴一个 Gunicorn + Django + Celery 的示例配置</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[program:EB-celery-beat]</span></span><br><span class="line"><span class="attr">command</span>=/home/wujinwen/Codes/EventsBroker/venv/bin/celery -A EventsBroker beat -l info</span><br><span class="line"><span class="attr">directory</span>=/home/wujinwen/Codes/EventsBroker</span><br><span class="line"><span class="attr">user</span>=wujinwen</span><br><span class="line"><span class="attr">stdout_logfile</span>=/home/wujinwen/Codes/EventsBroker/logs/celery-beat.log</span><br><span class="line"><span class="attr">redirect_stderr</span>=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">[program:EB-celery-worker]</span></span><br><span class="line"><span class="attr">command</span>=/home/wujinwen/Codes/EventsBroker/venv/bin/celery -A EventsBroker worker -l info</span><br><span class="line"><span class="attr">directory</span>=/home/wujinwen/Codes/EventsBroker</span><br><span class="line"><span class="attr">user</span>=wujinwen</span><br><span class="line"><span class="attr">stdout_logfile</span>=/home/wujinwen/Codes/EventsBroker/logs/celery-worker.log</span><br><span class="line"><span class="attr">redirect_stderr</span>=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">[program:EB-gunicorn]</span></span><br><span class="line"><span class="attr">command</span>=/home/wujinwen/Codes/EventsBroker/venv/bin/gunicorn --worker-class=gevent EventsBroker.wsgi:application  -b <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">8013</span> --reload</span><br><span class="line"><span class="attr">directory</span>=/home/wujinwen/Codes/EventsBroker</span><br><span class="line"><span class="attr">user</span>=wujinwen</span><br><span class="line"><span class="attr">stdout_logfile</span>=/home/wujinwen/Codes/EventsBroker/logs/gunicorn.log</span><br><span class="line"><span class="attr">redirect_stderr</span>=<span class="literal">true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">[group:EventsBroler]</span></span><br><span class="line"><span class="attr">programs</span>=EB-celery-beat,EB-celery-worker,EB-gunicorn</span><br></pre></td></tr></table></figure>
+<p>注意我们在最后有一行是 <code>[group:EventsBroler]</code> 这里我们设定了一个分组 <code>EventsBroker</code>，包括了三个进程，进程名之间用逗号分隔。（还有优先级设置可选，详细查看<a href="http://supervisord.org/configuration.html#group-x-section-settings" target="_blank" rel="noopener">官方文档</a>）</p>
+<h5 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h5><p>使用方法与进程的启动关闭类似。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动分组内所有进程</span></span><br><span class="line">supervisorctl start 分组名:*</span><br></pre></td></tr></table></figure>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><blockquote>
+<p><a href="https://www.liaoxuefeng.com/article/0013738926914703df5e93589a14c19807f0e285194fe84000" target="_blank" rel="noopener">Linux后台进程管理利器：supervisor</a></p>
+</blockquote>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href="/2017/11/13/拥抱pyenv-virtualenv-减少机械重复/" title="拥抱pyenv+virtualenv," 减少机械重复="">
+                    <span>Next Post</span>
+                    <span>拥抱pyenv+virtualenv, 减少机械重复</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href="/2017/10/27/Django集成全文检索/" title="Django集成全文检索">
+                    <span>Previous Post</span>
+                    <span>Django集成全文检索</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <script data-isso="http://comment.toonow.cc/" src="http://comment.toonow.cc/js/embed.min.js"></script>
+    <section id="isso-thread"></section>
+    
+
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:toono@qq.com" class="iconfont-archer email" title="email"></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/ToonoW" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="//twitter.com/toono_w" class="iconfont-archer twitter" target="_blank" title="twitter"></a>
+            
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-number">1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置"><span class="toc-number">2.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用"><span class="toc-number">3.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进阶配置与使用-分组"><span class="toc-number">4.</span> <span class="toc-text">进阶配置与使用 - 分组</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#使用-1"><span class="toc-number">4.0.1.</span> <span class="toc-text">使用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
+    </div>
+    
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header sidebar-header-show-archive">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 14 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span><a class="archive-post-title" href="/2018/04/08/译-RESTful-API-设计简易最佳实践/">译-RESTful API 设计简易最佳实践</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/02</span><a class="archive-post-title" href="/2018/04/02/将-JSON-转换成-SQL-脚本文件/">将 JSON 转换成 SQL 脚本文件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href="/2018/02/05/jupyter结合virtualenv使用/">jupyter 结合 virtualenv 使用，增加 kernel</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/06</span><a class="archive-post-title" href="/2018/01/06/linux命令记录/">linux命令记录</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/04</span><a class="archive-post-title" href="/2017/12/04/现有Django项目迁移到2-0版本/">译 - 现有 Django 项目迁移到新版本</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/13</span><a class="archive-post-title" href="/2017/11/13/拥抱pyenv-virtualenv-减少机械重复/">拥抱pyenv+virtualenv, 减少机械重复</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/08</span><a class="archive-post-title" href="/2017/11/08/Supervisor-Linux进程管理/">Supervisor: Linux进程管理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/27</span><a class="archive-post-title" href="/2017/10/27/Django集成全文检索/">Django集成全文检索</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/11</span><a class="archive-post-title" href="/2017/09/11/在Druid上受过的伤痛T-T/">在Druid上受过的伤痛T-T</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/08</span><a class="archive-post-title" href="/2017/09/08/Superset踩雷日志/">Superset踩雷日志</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/26</span><a class="archive-post-title" href="/2017/08/26/踩过才知道的Django坑/">踩过才知道的Django坑</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/17</span><a class="archive-post-title" href="/2017/08/17/比之前更加轻松的爬虫实践/">比之前更加轻松的爬虫实践</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/11</span><a class="archive-post-title" href="/2017/02/11/译-UITableViewCell中嵌套/">译-UITableViewCell中嵌套</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/12</span><a class="archive-post-title" href="/2017/01/12/译-Python多线程socket代码实战/">译-Python多线程socket代码实战</a>
+        </li>
+    
+    </ul></div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href="#">Superset</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Python</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">数据可视化</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Django</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Linux</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Supervisor</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">工具脚本</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">pyenv</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">virtualenv</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">iOS</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Druid</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">爬虫</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Scrapy</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">RESTful</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Socket</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br>
+    1、请确保node版本大于6.2<br>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+

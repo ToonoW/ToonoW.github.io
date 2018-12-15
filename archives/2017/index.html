@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html>
+    <head><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>
+        
+        快乐的鲸鱼
+        
+    </title>
+    <link rel="icon" href="/assets/favicon.jpeg">
+    <!-- TODO: 在font-face加载完毕后改变字体  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
+    <!-- 提前加载place holder  -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url(/font/Oswald-Regular.ttf);
+        }
+    </style>
+    <style type="text/css">
+        .site-intro-placeholder {
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0px;
+            width: calc(100% + 300px);
+            height: 100%;
+            background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+            background-position: center center;
+            transform: translate3d(-226px, 0, 0);
+            animation: gradient-move 2.5s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+    <link rel="stylesheet" href="/css/style.css?v=20171020">
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <a class="home-link" href="/">快乐的鲸鱼</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            var browser = {
+                    versions: function () {
+                        var u = window.navigator.userAgent;
+                        return {
+                            userAgent: u,
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否为iPad
+                            webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+                            weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+                            uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+                        };
+                    }()
+                }
+
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                        if (postIntroTags) {
+                            postIntroTags.classList.add('post-fade-in');
+                        }
+                        if (postIntroMeat) {
+                            postIntroMeat.classList.add('post-fade-in');
+                        }
+                    }
+                }
+                
+            console.log("userAgent:" + browser.versions.userAgent);
+            // UC不支持跨域，所以直接显示
+            if (browser.versions.uc) {
+                console.log("UCBrowser");
+                fontLoaded();
+            } else {
+                WebFont.load({
+                    custom: {
+                        families: ['Oswald-Regular']
+                    },
+                    loading: function () {  //所有字体开始加载
+                        // console.log('loading');
+                    },
+                    active: function () {  //所有字体已渲染
+                        fontLoaded();
+                    },
+                    inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                        console.log('inactive: timeout');
+                        fontLoaded();
+                    },
+                    timeout: 7000 // Set the timeout to two seconds
+                });
+            }
+        </script>
+        <div class="container container-unloaded">
+            <main class="main index-page">
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href="/2017/12/04/现有Django项目迁移到2-0版本/">
+                    <h2 class="abstract-title">
+                        
+                        <span>译 - 现有 Django 项目迁移到新版本</span>
+                    </h2>
+                <div class="abstract-content">
+                    
+ 2.0 版本正式发布，正考虑将现有的项目迁移到新版，顺手翻译官方的迁移文档。
+
+虽然版本的迁移是一个复杂的过程，但是迁移到最新版的 Django 你会有以下的毗益：
+
+新功能和改进。
+漏洞修复。
+老版本 Django 不会再有安全更新。（查看详情）
+跟随新版本 Django 的更新去更新你的代码库，从而使未来的更新更加轻松。
+
+以下的一些考虑尽可能让你的升级更加顺滑流畅。
+必读如果这是你第一次进行 Django 的版本升级工作，这篇 Django 发布流程指南。
+之后，你应该熟悉一下新版本的变动。
+
+阅读每个你使用的版本之后到你计划升级的版本的’final’的发行说明，以便知道需要了...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Python">Python</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Django">Django</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/12/04</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href="/2017/11/13/拥抱pyenv-virtualenv-减少机械重复/">
+                    <h2 class="abstract-title">
+                        
+                        <span>拥抱pyenv+virtualenv, 减少机械重复</span>
+                    </h2>
+                <div class="abstract-content">
+                    我是一名 VSCode 的深度使用者，几乎所有的编码工作都是发生在 VSCode。所以越来越重视在 VSCode 编码中每一个环节的效率。
+而 Python 则是我的主要生产工具，VSCode 通过插件的帮助，对 Python 的支持已经很好了。但是在我的使用中，美中不足的是每次新建「终端」之后都需要执行一句 source venv/bin/activate。虽然随着输入次数越来越多，写入这句命令已经可以在一两秒内解决，但是这种机械重复的工作在我专职写 Python 半年之后真的受够了，下定决心使用能够解决这个问题的 pyenv 。
+pyenv 使你轻松在多个版本的 python 之间切...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Python">Python</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="pyenv">pyenv</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="virtualenv">virtualenv</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/13</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href="/2017/11/08/Supervisor-Linux进程管理/">
+                    <h2 class="abstract-title">
+                        
+                        <span>Supervisor: Linux进程管理</span>
+                    </h2>
+                <div class="abstract-content">
+                    Supervisor 是 Python 实现的成熟度的进程管理工具。方便启动关闭非后台运行的服务，并且服务程序意外退出的时候自动重启服务程序。
+安装Centos
+sudo yum install supervisor
+配置软件的总配置在/etc/supervisord.conf，每个进程的配置文件都可以拆分开，放在/etc/supervisord.d目录下，注意需要是.ini后缀名。
+假设我们编写一个 hubot 的配置文件，在/etc/supervisord.d目录下创建文件hubot.ini。
+1234567[program:hubot]command=/home/wujinwen/...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Linux">Linux</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Supervisor">Supervisor</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/08</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href="/2017/10/27/Django集成全文检索/">
+                    <h2 class="abstract-title">
+                        
+                        <span>Django集成全文检索</span>
+                    </h2>
+                <div class="abstract-content">
+                    因为有高效检索数据库的需求，就选择了Elasticsearch(简称ES)作为搜索引擎。如果对ES不熟悉，直接用官网提供的客户端的话还是有一定的难度。所以为了省时间我使用了haystack，他可以连接不少的搜索引擎，其中就包括ES和whoosh。
+按照haystack官方文档教程一路配置下去都没问题，但是巧在我models中的字段存在空值，所以需要在search_indexes.py文件中定义的模型字段添加属性null=True，即
+123class SubtitleIndex(indexes.SearchIndex, indexes.Indexable):    ...    pub_...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Python">Python</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Django">Django</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/10/27</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href="/2017/09/11/在Druid上受过的伤痛T-T/">
+                    <h2 class="abstract-title">
+                        
+                        <span>在Druid上受过的伤痛T-T</span>
+                    </h2>
+                <div class="abstract-content">
+                    利用Kafka给Druid导入数据报错Provider io.druid.storage.hdfs.HdfsStorageDruidModule could not be instantiated外行人遇到下面一大段错误让人摸不着头脑，意思好像是说缺少了一些必要的类组件，但是Druid的开发者应该不会在稳定版忘了打包一些部件吧。硬是搜索了大半天的答案，实际上也没什么资料可以搜索到，所以同样的几条翻来覆去地看，最后把每条觉得不太可能成功的答案都尝试了，终于有一个奏效了。
+错误信息如下。
+1234567891011121314151617181920212223242526272829303...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Druid">Druid</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/09/11</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href="/2017/09/08/Superset踩雷日志/">
+                    <h2 class="abstract-title">
+                        
+                        <span>Superset踩雷日志</span>
+                    </h2>
+                <div class="abstract-content">
+                    生成图表时出错unorderable types: str() &gt; int()
+Superset 0.19.1
+
+12345678910111213141516Traceback (most recent call last):  File "/Users/wujinwen/Codes/Python/CRAnalysis/incubator-superset/superset/viz.py", line 253, in get_payload    data = self.get_data(df)  File "/Users/wujinwen/Codes/Python/CRAnal...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Superset">Superset</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Python">Python</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="数据可视化">数据可视化</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/09/08</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href="/2017/08/26/踩过才知道的Django坑/">
+                    <h2 class="abstract-title">
+                        
+                        <span>踩过才知道的Django坑</span>
+                    </h2>
+                <div class="abstract-content">
+                    Model的字段null和blank设置不为空，但是看数据库怎么还是存了空白值？在新建一个Model对象的时候发现字段不完整也能够save，但是我设计Model类的时候已经把一些必填的字段设置了null=True和blank=True，按理说存储的值是不允许为空的。还以为是Sqlite3的问题，换到了MySQL也是没有变化。所以就找到关于null和blank相关的文章，发现了Django没有按照我们预期进行的原因。
+
+Django规定储存空字符串来代表空值, 当从数据库中读取NULL或空值时都为空字符串。
+
+假设我们的Model A，有CharField字段null=False和blac...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Python">Python</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Django">Django</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/08/26</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href="/2017/08/17/比之前更加轻松的爬虫实践/">
+                    <h2 class="abstract-title">
+                        
+                        <span>比之前更加轻松的爬虫实践</span>
+                    </h2>
+                <div class="abstract-content">
+                    在之前曾经做过好几个爬虫项目，因为当时刚刚使用爬虫的技术，一股蛮力地写爬取规则和解析存储规则，无论是不是同一种类型的爬虫，每个都给写一个单独使用的pipeline和item类。这种笨方法吃力不讨好，完全没有发挥Scrapy的特性，启动不同的爬虫还要去setting.py文件去注释掉和此次爬虫无关的pipeline。
+时隔了几个月，又有写爬虫的需求。是爬取健康分类的资讯，需要爬取不同网站的同类型内容，存储到我的MongoDB数据库。这里选用MongoDB是因为它适合文档的存储，而且随时可以拓展字段，使用起来比传统的SQL数据库简便多了。
+先看看我们的项目结构
+123456789NewsSp...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Python">Python</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="爬虫">爬虫</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Scrapy">Scrapy</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/08/17</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href="/2017/02/11/译-UITableViewCell中嵌套/">
+                    <h2 class="abstract-title">
+                        
+                        <span>译-UITableViewCell中嵌套</span>
+                    </h2>
+                <div class="abstract-content">
+                    说在前面在写的一个App用到了UITableViewCell中嵌套UICollectionView的设计，原以为会很简单，但是后来发现还是问题多多的，例如DataSource的设置问题，还有我对重用中的一些理解的混乱，巴拉巴拉巴拉。所以就找到了篇的原文。  
+原文：Putting a UICollectionView in a UITableViewCell
+正文所以，你希望将collection view放进一个table view cell里面是吧？这听起来很简单对吧？好，做好这件简单的事情需要一点点准备工作。我们希望每个类结构清晰各司其职，那么UITableViewCell不能充当...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="iOS">iOS</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/02/11</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href="/2017/01/12/译-Python多线程socket代码实战/">
+                    <h2 class="abstract-title">
+                        
+                        <span>译-Python多线程socket代码实战</span>
+                    </h2>
+                <div class="abstract-content">
+                    说在前面因为中文太难搜索到合适的 socket 的实用编程案例，能找到的都是简单使用 socket 居多，水分比较大。而且在做的是 GUI 编程，所以特意找到了这篇文章来学习，感觉非常实用。翻译没有把握的部分我都给出了原文，希望能够给出更好的翻译，共勉。
+正文当我们创建GUI图形界面程序的时候经常需要用到网络编程去获取一些实用数据，而我们通常遇到的绊脚石就是怎么将 GUI 结合 I/O 编程，无论是 HTTP 请求，还是 RPC 协议，简单的 socket 通信还是连续的端口(serial port)，这些问题让我们没那么容易将 I/O 编程与 GUI 很好地结合在一起。没有人希望在他的...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Python">Python</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Socket">Socket</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/01/12</span>
+                </div>
+            </div>
+        </article>
+    
+    <!-- paginator  -->
+    
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:toono@qq.com" class="iconfont-archer email" title="email"></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/ToonoW" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="//twitter.com/toono_w" class="iconfont-archer twitter" target="_blank" title="twitter"></a>
+            
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header sidebar-header-show-archive">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 14 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span><a class="archive-post-title" href="/2018/04/08/译-RESTful-API-设计简易最佳实践/">译-RESTful API 设计简易最佳实践</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/02</span><a class="archive-post-title" href="/2018/04/02/将-JSON-转换成-SQL-脚本文件/">将 JSON 转换成 SQL 脚本文件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href="/2018/02/05/jupyter结合virtualenv使用/">jupyter 结合 virtualenv 使用，增加 kernel</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/06</span><a class="archive-post-title" href="/2018/01/06/linux命令记录/">linux命令记录</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/04</span><a class="archive-post-title" href="/2017/12/04/现有Django项目迁移到2-0版本/">译 - 现有 Django 项目迁移到新版本</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/13</span><a class="archive-post-title" href="/2017/11/13/拥抱pyenv-virtualenv-减少机械重复/">拥抱pyenv+virtualenv, 减少机械重复</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/08</span><a class="archive-post-title" href="/2017/11/08/Supervisor-Linux进程管理/">Supervisor: Linux进程管理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/27</span><a class="archive-post-title" href="/2017/10/27/Django集成全文检索/">Django集成全文检索</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/11</span><a class="archive-post-title" href="/2017/09/11/在Druid上受过的伤痛T-T/">在Druid上受过的伤痛T-T</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/08</span><a class="archive-post-title" href="/2017/09/08/Superset踩雷日志/">Superset踩雷日志</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/26</span><a class="archive-post-title" href="/2017/08/26/踩过才知道的Django坑/">踩过才知道的Django坑</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/17</span><a class="archive-post-title" href="/2017/08/17/比之前更加轻松的爬虫实践/">比之前更加轻松的爬虫实践</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/11</span><a class="archive-post-title" href="/2017/02/11/译-UITableViewCell中嵌套/">译-UITableViewCell中嵌套</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/12</span><a class="archive-post-title" href="/2017/01/12/译-Python多线程socket代码实战/">译-Python多线程socket代码实战</a>
+        </li>
+    
+    </ul></div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href="#">Superset</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Python</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">数据可视化</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Django</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Linux</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Supervisor</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">工具脚本</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">pyenv</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">virtualenv</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">iOS</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Druid</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">爬虫</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Scrapy</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">RESTful</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Socket</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br>
+    1、请确保node版本大于6.2<br>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+

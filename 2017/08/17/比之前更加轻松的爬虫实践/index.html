@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+    <head><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>
+        
+        比之前更加轻松的爬虫实践 · 快乐的鲸鱼
+        
+    </title>
+    <link rel="icon" href="/assets/favicon.jpeg">
+    <!-- TODO: 在font-face加载完毕后改变字体  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
+    <!-- 提前加载place holder  -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url(/font/Oswald-Regular.ttf);
+        }
+    </style>
+    <style type="text/css">
+        .site-intro-placeholder {
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0px;
+            width: calc(100% + 300px);
+            height: 100%;
+            background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+            background-position: center center;
+            transform: translate3d(-226px, 0, 0);
+            animation: gradient-move 2.5s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+    <link rel="stylesheet" href="/css/style.css?v=20171020">
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">快乐的鲸鱼</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">比之前更加轻松的爬虫实践</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href="/">快乐的鲸鱼</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            比之前更加轻松的爬虫实践
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class="post-intro-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Python">Python</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="爬虫">爬虫</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href="Scrapy">Scrapy</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/08/17</span>
+            </div>
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            var browser = {
+                    versions: function () {
+                        var u = window.navigator.userAgent;
+                        return {
+                            userAgent: u,
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否为iPad
+                            webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+                            weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+                            uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+                        };
+                    }()
+                }
+
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                        if (postIntroTags) {
+                            postIntroTags.classList.add('post-fade-in');
+                        }
+                        if (postIntroMeat) {
+                            postIntroMeat.classList.add('post-fade-in');
+                        }
+                    }
+                }
+                
+            console.log("userAgent:" + browser.versions.userAgent);
+            // UC不支持跨域，所以直接显示
+            if (browser.versions.uc) {
+                console.log("UCBrowser");
+                fontLoaded();
+            } else {
+                WebFont.load({
+                    custom: {
+                        families: ['Oswald-Regular']
+                    },
+                    loading: function () {  //所有字体开始加载
+                        // console.log('loading');
+                    },
+                    active: function () {  //所有字体已渲染
+                        fontLoaded();
+                    },
+                    inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                        console.log('inactive: timeout');
+                        fontLoaded();
+                    },
+                    timeout: 7000 // Set the timeout to two seconds
+                });
+            }
+        </script>
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>在之前曾经做过好几个爬虫项目，因为当时刚刚使用爬虫的技术，一股蛮力地写爬取规则和解析存储规则，无论是不是同一种类型的爬虫，每个都给写一个单独使用的<code>pipeline</code>和<code>item</code>类。这种笨方法吃力不讨好，完全没有发挥Scrapy的特性，启动不同的爬虫还要去<code>setting.py</code>文件去注释掉和此次爬虫无关的<code>pipeline</code>。</p>
+<p>时隔了几个月，又有写爬虫的需求。是爬取健康分类的资讯，需要爬取不同网站的同类型内容，存储到我的MongoDB数据库。这里选用MongoDB是因为它适合文档的存储，而且随时可以拓展字段，使用起来比传统的SQL数据库简便多了。</p>
+<p>先看看我们的项目结构</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">NewsSpiders</span><br><span class="line">├── __init__.py</span><br><span class="line">├── items.py</span><br><span class="line">├── middlewares.py</span><br><span class="line">├── pipelines.py</span><br><span class="line">├── settings.py</span><br><span class="line">└── spiders</span><br><span class="line">    ├── __init__.py</span><br><span class="line">    └── sina.py</span><br></pre></td></tr></table></figure>
+<h3 id="编码上的思路"><a href="#编码上的思路" class="headerlink" title="编码上的思路"></a>编码上的思路</h3><p>对于入门者来说，最难的不是怎么把框架用起来，而是怎样才是使用框架的更优实践。我自己的话，通常是一开始费尽心机把程序写起来，只求能用。但是不断地追加代码之后，会越来越觉得项目已经被设计不合理拖垮了，一心只求更好的实践去重构。所以接下来就记录一些比粗暴方法更好的实践。</p>
+<ul>
+<li><strong>items.py -</strong> 在这里定义我们资讯类通用的数据结构，无外乎标题、主体内容、来源媒体、来源网址、内容里的图片链接、图片的存储路径等；</li>
+<li><strong>spiders/ -</strong> 文件夹下面放我们具体的爬虫，习惯性按照文件区分爬虫，我这里只有一个<code>sina.py</code>文件，也就是只有一个爬虫，实际上我们可以增加多个爬虫文件。另外，这里面的爬虫得讲究，需要最终产出的<code>item</code>格式尽可能相仿，这样子整个爬虫项目的数据清洗处理流程才能最大限度地复用，即不同爬虫产出的<code>item</code>每个字段的格式相同，例如标题都是纯文本，而主体都是<code>HTML</code>；</li>
+<li><strong>middlewares.py -</strong> 这里存放中间件，在我的理解是爬虫的钩子。例如我在这里编写了修改<code>Headers</code>的中间件，重写了<code>UserAgentMiddleware</code>的 <code>process_request</code>方法，对请求的头进行了处理。几乎爬虫全部生命周期都可以在这里进行钩子处理；</li>
+<li><strong>pipelines.py -</strong> 这里就是<code>item</code>被处理的管道了，其实也就是工厂里的流水线，每一个<code>pipelines</code>里不同功用的类就是一个负责不同操作的流水线工人，通过<code>setting.py</code>内的配置进行优先级的设置，进而控制执行的顺序。在这里面我将去重、抽取图片URL、下载图片、存储<code>item</code>都独立成一个<code>pipeline</code>类，按步骤进行处理；</li>
+</ul>
+<p>下面是可参考的源码展示，spiders部分大多数是不可参考的，因为每个网站都是特异的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">items.py</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"><span class="keyword">from</span> scrapy <span class="keyword">import</span> Field</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewsspidersItem</span><span class="params">(scrapy.Item)</span>:</span></span><br><span class="line">    title = Field()</span><br><span class="line">    body = Field()<span class="comment">#</span></span><br><span class="line">    tags = Field()</span><br><span class="line">    source = Field()            <span class="comment"># 来源名称</span></span><br><span class="line">    source_url = Field()        <span class="comment"># 来源URL</span></span><br><span class="line">    datetime = Field()          <span class="comment"># 时间</span></span><br><span class="line">    intro = Field()             <span class="comment"># 介绍</span></span><br><span class="line">    image_urls = Field()</span><br><span class="line">    images = Field()            <span class="comment"># 利用&#123;index&#125;进行占位，使用的时候替换上图片地址</span></span><br><span class="line">    image_paths = Field()       <span class="comment"># 图片路径列表</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">sina.py</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">from</span> scrapy.spider <span class="keyword">import</span> CrawlSpider</span><br><span class="line"><span class="keyword">from</span> scrapy <span class="keyword">import</span> Request</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> ..items <span class="keyword">import</span> CrnewsspidersItem</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 新浪健康 疾病</span></span><br><span class="line">DISEASE_API_URL = <span class="string">'省略'</span></span><br><span class="line"><span class="comment"># 新浪健康 养生</span></span><br><span class="line">HEALTH_CARE_API_URL = <span class="string">'省略'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SinaSpider</span><span class="params">(CrawlSpider)</span>:</span></span><br><span class="line">    name = <span class="string">'sina'</span></span><br><span class="line">    start_urls = [</span><br><span class="line">        DISEASE_API_URL + <span class="string">'1'</span>,</span><br><span class="line">        HEALTH_CARE_API_URL + <span class="string">'1'</span>,</span><br><span class="line">    ]</span><br><span class="line">    handle_httpstatus_list = [<span class="number">200</span>, <span class="number">403</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span></span><br><span class="line">        result = &#123;&#125;</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            result = json.loads(response.body)</span><br><span class="line">            logging.error(type(response.body))</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            AttributeError(<span class="string">'输入json出错'</span>)</span><br><span class="line">            logging.error(<span class="string">'输入json出错'</span>)</span><br><span class="line">            logging.error(response.body)</span><br><span class="line">        data = result.get(<span class="string">'result'</span>)</span><br><span class="line">        <span class="keyword">if</span> data <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            data = data.get(<span class="string">'data'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            ValueError(<span class="string">'json中result.data内容应不为空'</span>)</span><br><span class="line">            data = []</span><br><span class="line">        <span class="keyword">if</span> len(data) <span class="keyword">is</span> <span class="keyword">not</span> <span class="number">0</span>:</span><br><span class="line">            <span class="comment"># 爬取文章</span></span><br><span class="line">            <span class="keyword">for</span> page <span class="keyword">in</span> data:</span><br><span class="line">                info = &#123;</span><br><span class="line">                    <span class="string">'source_url'</span>: page[<span class="string">'url'</span>],</span><br><span class="line">                    <span class="string">'source'</span>: page[<span class="string">'media_name'</span>],</span><br><span class="line">                    <span class="string">'title'</span>: page[<span class="string">'title'</span>],</span><br><span class="line">                    <span class="string">'datetime'</span>: page[<span class="string">'ctime'</span>],</span><br><span class="line">                    <span class="string">'tags'</span>: page[<span class="string">'keywords'</span>].split(<span class="string">','</span>) <span class="keyword">if</span> page[<span class="string">'keywords'</span>] != <span class="string">''</span> <span class="keyword">else</span> []</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">yield</span> Request(page[<span class="string">'url'</span>], callback=self.parse_page, meta=&#123;<span class="string">'info'</span>: info&#125;)</span><br><span class="line">            <span class="comment"># 爬取下一页</span></span><br><span class="line">            page_num = int(re.split(<span class="string">r'page='</span>, response.url)[<span class="number">-1</span>])</span><br><span class="line">            prefix = <span class="string">''</span></span><br><span class="line">            <span class="keyword">if</span> DISEASE_API_URL <span class="keyword">in</span> response.url:</span><br><span class="line">                prefix = DISEASE_API_URL</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                prefix = HEALTH_CARE_API_URL</span><br><span class="line">            url = prefix + str(page_num + <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">yield</span> Request(url, callback=self.parse, headers=&#123;<span class="string">'Referer'</span>: <span class="string">''</span>&#125;)        <span class="comment"># 接口Referer不能有值，否则会403</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_page</span><span class="params">(self, response)</span>:</span></span><br><span class="line">        info = response.meta[<span class="string">'info'</span>]</span><br><span class="line">        item = CrnewsspidersItem()</span><br><span class="line">        <span class="keyword">for</span> key <span class="keyword">in</span> info:</span><br><span class="line">            item[key] = info[key]</span><br><span class="line">        <span class="comment"># 等待处理body中的图片链接</span></span><br><span class="line">        item[<span class="string">'body'</span>] = response.xpath(<span class="string">'//div[@id="artibody"]'</span>)</span><br><span class="line">        <span class="keyword">return</span> item</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">middlewares.py</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> scrapy <span class="keyword">import</span> signals</span><br><span class="line"><span class="keyword">from</span> scrapy.downloadermiddlewares.useragent <span class="keyword">import</span> UserAgentMiddleware</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyAgentMiddleware</span><span class="params">(UserAgentMiddleware)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    随机设置请求头的user_agent</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    user_agent_list = [</span><br><span class="line">        <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1"</span>,</span><br><span class="line">        <span class="string">"Mozilla/5.0 (X11; CrOS i686 2268.111.0) AppleWebKit/536.11 (KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11"</span>,</span><br><span class="line">        <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1092.0 Safari/536.6"</span>,</span><br><span class="line">        <span class="string">"Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.6 (KHTML, like Gecko) Chrome/20.0.1090.0 Safari/536.6"</span>,</span><br><span class="line">        <span class="string">"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/19.77.34.5 Safari/537.1"</span>,</span><br><span class="line">        <span class="string">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.9 Safari/536.5"</span>,</span><br><span class="line">        <span class="string">"Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.36 Safari/536.5"</span>,</span><br><span class="line">        <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3"</span>,</span><br><span class="line">        <span class="string">"Mozilla/5.0 (Windows NT 5.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3"</span>,</span><br><span class="line">        <span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3"</span>,</span><br><span class="line">        <span class="string">"Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3"</span>,</span><br><span class="line">        <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3"</span>,</span><br><span class="line">        <span class="string">"Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3"</span>,</span><br><span class="line">        <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3"</span>,</span><br><span class="line">        <span class="string">"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3"</span>,</span><br><span class="line">        <span class="string">"Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.0 Safari/536.3"</span>,</span><br><span class="line">        <span class="string">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"</span>,</span><br><span class="line">        <span class="string">"Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"</span></span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, user_agent=<span class="string">''</span>)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.user_agent_len = len(self.user_agent_list)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_request</span><span class="params">(self, request, spider)</span>:</span></span><br><span class="line">        request.headers[<span class="string">'User-Agent'</span>] = self.user_agent_list[random.randrange(<span class="number">0</span>, self.user_agent_len)]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">pipelines.py</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">from</span> scrapy <span class="keyword">import</span> Request</span><br><span class="line"><span class="keyword">from</span> scrapy.pipelines.images <span class="keyword">import</span> ImagesPipeline</span><br><span class="line"><span class="keyword">from</span> scrapy.exceptions <span class="keyword">import</span> DropItem</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CrnewsspidersPipeline</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> item</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CollectImageUrlPipeline</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    将body中的image URL取出存入image_urls待下载</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></span><br><span class="line">        body = item[<span class="string">'body'</span>]</span><br><span class="line">        urls = body.xpath(<span class="string">'.//img'</span>).xpath(<span class="string">'@src'</span>).extract()</span><br><span class="line">        <span class="keyword">for</span> url <span class="keyword">in</span> urls:</span><br><span class="line">            <span class="keyword">if</span> <span class="string">'http'</span> <span class="keyword">not</span> <span class="keyword">in</span> url:</span><br><span class="line">                logging.warning(<span class="string">'图片URL不完整： &#123;&#125;'</span>, url)</span><br><span class="line">                urls.remove(url)</span><br><span class="line">        item[<span class="string">'image_urls'</span>] = urls</span><br><span class="line">        logging.info(<span class="string">"图片数目: "</span> + str(len(item[<span class="string">'image_urls'</span>])))</span><br><span class="line">        <span class="keyword">return</span> item</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ImagesDownloadPipeline</span><span class="params">(ImagesPipeline)</span>:</span></span><br><span class="line">    <span class="comment"># 下载图片</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_media_requests</span><span class="params">(self, item, info)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> image_url <span class="keyword">in</span> item[<span class="string">'image_urls'</span>]:</span><br><span class="line">            <span class="keyword">yield</span> Request(image_url)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">item_completed</span><span class="params">(self, results, item, info)</span>:</span></span><br><span class="line">        image_paths = [x[<span class="string">'path'</span>] <span class="keyword">for</span> ok, x <span class="keyword">in</span> results <span class="keyword">if</span> ok]</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> image_paths:</span><br><span class="line">            item[<span class="string">'image_paths'</span>] = []</span><br><span class="line">        item[<span class="string">'image_paths'</span>] = image_paths</span><br><span class="line">        <span class="keyword">return</span> item</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MongoDBPipeline</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    存储到MongoDB</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    collection_name = <span class="string">'news_items'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, mongo_uri, mongo_db)</span>:</span></span><br><span class="line">        self.mongo_uri = mongo_uri</span><br><span class="line">        self.mongo_db = mongo_db</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">from_crawler</span><span class="params">(cls, crawler)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> cls(</span><br><span class="line">            mongo_uri=crawler.settings.get(<span class="string">'MONGO_URI'</span>),</span><br><span class="line">            mongo_db=crawler.settings.get(<span class="string">'MONGO_DATABASE'</span>)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">open_spider</span><span class="params">(self, spider)</span>:</span></span><br><span class="line">        self.client = pymongo.MongoClient(self.mongo_uri)</span><br><span class="line">        self.db = self.client[self.mongo_db]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">close_spider</span><span class="params">(self, spider)</span>:</span></span><br><span class="line">        self.client.close()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></span><br><span class="line">        item[<span class="string">'body'</span>] = item[<span class="string">'body'</span>].extract()</span><br><span class="line">        self.db[self.collection_name].insert(dict(item))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DuplicatesPipeline</span><span class="params">(MongoDBPipeline)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    初步去重</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(self, item, spider)</span>:</span></span><br><span class="line">        result = self.db[self.collection_name].find(&#123;<span class="string">'source_url'</span>: item[<span class="string">'source_url'</span>]&#125;)</span><br><span class="line">        <span class="keyword">if</span> result.count() != <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">raise</span> DropItem(<span class="string">"Duplicate item found: %s"</span> % item)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> item</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">setting.py</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">BOT_NAME = <span class="string">'NewsSpiders'</span></span><br><span class="line"></span><br><span class="line">SPIDER_MODULES = [<span class="string">'NewsSpiders.spiders'</span>]</span><br><span class="line">NEWSPIDER_MODULE = <span class="string">'NewsSpiders.spiders'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Obey robots.txt rules</span></span><br><span class="line">ROBOTSTXT_OBEY = <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Disable cookies (enabled by default)</span></span><br><span class="line">COOKIES_ENABLED = <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Enable or disable downloader middlewares</span></span><br><span class="line"><span class="comment"># See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html</span></span><br><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line"><span class="comment">#    'CRNewsSpiders.middlewares.MyCustomDownloaderMiddleware': 543,</span></span><br><span class="line">    <span class="string">'CRNewsSpiders.middlewares.MyAgentMiddleware'</span>: <span class="number">544</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Configure item pipelines</span></span><br><span class="line"><span class="comment"># See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html</span></span><br><span class="line">ITEM_PIPELINES = &#123;</span><br><span class="line">    <span class="comment"># 'CRNewsSpiders.pipelines.CrnewsspidersPipeline': 300,</span></span><br><span class="line">    <span class="string">'CRNewsSpiders.pipelines.DuplicatesPipeline'</span>: <span class="number">300</span>,</span><br><span class="line">    <span class="string">'CRNewsSpiders.pipelines.CollectImageUrlPipeline'</span>: <span class="number">301</span>,</span><br><span class="line">    <span class="string">'CRNewsSpiders.pipelines.ImagesDownloadPipeline'</span>: <span class="number">302</span>,</span><br><span class="line">    <span class="string">'CRNewsSpiders.pipelines.MongoDBPipeline'</span>: <span class="number">310</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># MongoDB Database Info</span></span><br><span class="line">MONGO_URI = <span class="string">'mongodb://localhost'</span></span><br><span class="line">MONGO_DATABASE = <span class="string">'news'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 图片存储</span></span><br><span class="line">IMAGES_STORE = <span class="string">'./images'</span></span><br><span class="line"><span class="comment"># 避免重复下载，设置图片过期时间</span></span><br><span class="line">IMAGES_EXPIRES = <span class="number">30</span></span><br></pre></td></tr></table></figure>
+<h3 id="更加简单的部署"><a href="#更加简单的部署" class="headerlink" title="更加简单的部署"></a>更加简单的部署</h3><p>经过多番寻找和纠结，我最终选用了<code>scrapyd</code>进行爬虫的部署。</p>
+<p>优点很多，但主要是达到了我的几个需求：</p>
+<ol>
+<li>使用网络API JSON接口进行控制爬虫项目群，方便之后拓展友好的用户界面；</li>
+<li>使用简单。简化了Scrapy的使用。</li>
+<li>部署简单。服务端程序运行之后，在本地项目添加对应的地址信息就可以同步到生产环境。(不过建议开发环境和生产环境使用统一版本Python,并且搭配Supervisor使用);</li>
+</ol>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href="/2017/08/26/踩过才知道的Django坑/" title="踩过才知道的Django坑">
+                    <span>Next Post</span>
+                    <span>踩过才知道的Django坑</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href="/2017/02/11/译-UITableViewCell中嵌套/" title="译-UITableViewCell中嵌套">
+                    <span>Previous Post</span>
+                    <span>译-UITableViewCell中嵌套</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <script data-isso="http://comment.toonow.cc/" src="http://comment.toonow.cc/js/embed.min.js"></script>
+    <section id="isso-thread"></section>
+    
+
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:toono@qq.com" class="iconfont-archer email" title="email"></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/ToonoW" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="//twitter.com/toono_w" class="iconfont-archer twitter" target="_blank" title="twitter"></a>
+            
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#编码上的思路"><span class="toc-number">1.</span> <span class="toc-text">编码上的思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更加简单的部署"><span class="toc-number">2.</span> <span class="toc-text">更加简单的部署</span></a></li></ol>
+    </div>
+    
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header sidebar-header-show-archive">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 14 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span><a class="archive-post-title" href="/2018/04/08/译-RESTful-API-设计简易最佳实践/">译-RESTful API 设计简易最佳实践</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/02</span><a class="archive-post-title" href="/2018/04/02/将-JSON-转换成-SQL-脚本文件/">将 JSON 转换成 SQL 脚本文件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href="/2018/02/05/jupyter结合virtualenv使用/">jupyter 结合 virtualenv 使用，增加 kernel</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/06</span><a class="archive-post-title" href="/2018/01/06/linux命令记录/">linux命令记录</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/04</span><a class="archive-post-title" href="/2017/12/04/现有Django项目迁移到2-0版本/">译 - 现有 Django 项目迁移到新版本</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/13</span><a class="archive-post-title" href="/2017/11/13/拥抱pyenv-virtualenv-减少机械重复/">拥抱pyenv+virtualenv, 减少机械重复</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/08</span><a class="archive-post-title" href="/2017/11/08/Supervisor-Linux进程管理/">Supervisor: Linux进程管理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/27</span><a class="archive-post-title" href="/2017/10/27/Django集成全文检索/">Django集成全文检索</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/11</span><a class="archive-post-title" href="/2017/09/11/在Druid上受过的伤痛T-T/">在Druid上受过的伤痛T-T</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/08</span><a class="archive-post-title" href="/2017/09/08/Superset踩雷日志/">Superset踩雷日志</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/26</span><a class="archive-post-title" href="/2017/08/26/踩过才知道的Django坑/">踩过才知道的Django坑</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/17</span><a class="archive-post-title" href="/2017/08/17/比之前更加轻松的爬虫实践/">比之前更加轻松的爬虫实践</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/11</span><a class="archive-post-title" href="/2017/02/11/译-UITableViewCell中嵌套/">译-UITableViewCell中嵌套</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/12</span><a class="archive-post-title" href="/2017/01/12/译-Python多线程socket代码实战/">译-Python多线程socket代码实战</a>
+        </li>
+    
+    </ul></div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href="#">Superset</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Python</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">数据可视化</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Django</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Linux</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Supervisor</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">工具脚本</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">pyenv</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">virtualenv</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">iOS</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Druid</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">爬虫</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Scrapy</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">RESTful</a></span>
+    
+        <span class="sidebar-tag-name"><a href="#">Socket</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br>
+    1、请确保node版本大于6.2<br>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+
