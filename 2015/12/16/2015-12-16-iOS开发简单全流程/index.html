@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html>
+    <head><meta name="generator" content="Hexo 3.9.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>
+        
+        iOS开发简单全流程 · 快乐的鲸鱼
+        
+    </title>
+    <link rel="icon" href="/favicon.ico">
+    <!-- TODO: 在font-face加载完毕后改变字体  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
+    <!-- 提前加载place holder  -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url(/font/Oswald-Regular.ttf);
+        }
+    </style>
+    <style type="text/css">
+        .site-intro-placeholder {
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0px;
+            width: calc(100% + 300px);
+            height: 100%;
+            background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+            background-position: center center;
+            transform: translate3d(-226px, 0, 0);
+            animation: gradient-move 2.5s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+    <link rel="stylesheet" href="/css/style.css?v=20171020">
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >快乐的鲸鱼</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">iOS开发简单全流程</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>快乐的鲸鱼</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            iOS开发简单全流程
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2015/12/16</span>
+            </div>
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            var browser = {
+                    versions: function () {
+                        var u = window.navigator.userAgent;
+                        return {
+                            userAgent: u,
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否为iPad
+                            webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+                            weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+                            uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+                        };
+                    }()
+                }
+
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                        if (postIntroTags) {
+                            postIntroTags.classList.add('post-fade-in');
+                        }
+                        if (postIntroMeat) {
+                            postIntroMeat.classList.add('post-fade-in');
+                        }
+                    }
+                }
+                
+            console.log("userAgent:" + browser.versions.userAgent);
+            // UC不支持跨域，所以直接显示
+            if (browser.versions.uc) {
+                console.log("UCBrowser");
+                fontLoaded();
+            } else {
+                WebFont.load({
+                    custom: {
+                        families: ['Oswald-Regular']
+                    },
+                    loading: function () {  //所有字体开始加载
+                        // console.log('loading');
+                    },
+                    active: function () {  //所有字体已渲染
+                        fontLoaded();
+                    },
+                    inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                        console.log('inactive: timeout');
+                        fontLoaded();
+                    },
+                    timeout: 7000 // Set the timeout to two seconds
+                });
+            }
+        </script>
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这是一个iOS全流程的一个简单简介，并不会很严谨地构架一个项目，我们会讲如何做一个提问详情显示的页面，主要目的还是为没有接触过iOS开发的同学揭开App制作的神秘面纱。</p>
+<h2 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h2><ol>
+<li>开发准备介绍。开发环境，开发语言，开发工具。</li>
+<li>Objective-C语法简介。</li>
+<li>开始编码。</li>
+</ol>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="开发准备介绍"><a href="#开发准备介绍" class="headerlink" title="开发准备介绍"></a>开发准备介绍</h3><ul>
+<li><p>开发环境：</p>
+<p>开发环境必须是在苹果公司的OS X系统，根据情况可以使用Mac电脑或者在虚拟机下体验。</p>
+</li>
+<li><p>开发语言:</p>
+<p>进行iOS开发，官方提供两种语言可供选择，分别是Objective-C, Swift。我们这里选择Objective-C。值得一说的是，Facebook公司的开源项目React Native 可以让你用JavaScript进行iOS开发，更加简便。</p>
+</li>
+<li><p>开发工具:</p>
+<p>使用苹果公司的开发软件Xcode，在App Store免费下载使用。</p>
+</li>
+</ul>
+<h3 id="Objective-C语法简易简介"><a href="#Objective-C语法简易简介" class="headerlink" title="Objective-C语法简易简介"></a>Objective-C语法简易简介</h3><p>Objective-C (下文简称OC)是在C语言的基础上封装起来的。Objective-C是一门真正的面向对象的语言。</p>
+<ol>
+<li><p>数据类型: </p>
+<ul>
+<li><p>NSString - 字符串类型</p>
+</li>
+<li><p>NSDictionary - 不可变字典类型</p>
+</li>
+<li><p>NSMutableDictionary - 可变字典类型</p>
+</li>
+<li><p>NSArray - 不可变数组类型</p>
+</li>
+<li><p>NSMutableArray - 可变数组类型 </p>
+<blockquote>
+<p>这里只介绍将会用到的常用Objective-C特有类型，C语言中存在的类型在Objective-C中也可以使用，不过推荐用Objective-C内提供的数据类型</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<p>2.方法定义与调用:</p>
+<ul>
+<li>类方法定义:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">+ (void)sayHello &#123;</span><br><span class="line">  NSLog(&quot;Hello World!&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>OC的方法定义和其他语言看起来有很大区别，类方法的定义是要用”+”号开头。</li>
+</ul>
+<p>实例方法定义:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (void)setTitle &#123;</span><br><span class="line">  self.title = &quot;Hello&quot;;</span><br><span class="line">  NSLog(&quot;This title is %@&quot;, self.title);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实例方法的定义是需要用”-“开头。</p>
+<ul>
+<li>方法的调用:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self setTitle];</span><br></pre></td></tr></table></figure>
+
+<p>在OC中方法的调用是需要”[ ]” 括起来，前半部分是对象，后半部分是具体的方法。</p>
+<p>在OC中还有其他更高级的一些语法，需要深入了解可以参考一些OC入门书籍。</p>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><p>打开Xcode并执行File\New\Project。选择Application\Single View Application。将项目命名为PageSample，单击下一步，选择一个目录去保存你的项目，然后点击Create。 现在，你的基础项目已经完成。下一步是集成你的第三方工具。但首先你要关闭Xcode，确保他不会影响下一步。</p>
+<h4 id="Cocoapods"><a href="#Cocoapods" class="headerlink" title="Cocoapods"></a>Cocoapods</h4><p>用来导入开源项目，并且导入所导入项目所需要的依赖的其它开源项目。使用教程点<a href="http://blog.devtang.com/blog/2014/05/25/use-cocoapod-to-manage-ios-lib-dependency/?utm_source=tuicool&utm_medium=referral" target="_blank" rel="noopener">这里</a>。</p>
+<h4 id="AFNetworking"><a href="#AFNetworking" class="headerlink" title="AFNetworking"></a>AFNetworking</h4><p>高效并且使用简单的网络库。在本次项目中需要用到，请在pod中导入(或者你可以直接将文件拖入项目中)。</p>
+<h4 id="SDWebImage"><a href="#SDWebImage" class="headerlink" title="SDWebImage"></a>SDWebImage</h4><p>高效的异步加载网络图片的开源项目，我们用来加载图片。</p>
+<h4 id="MBProgressHUD"><a href="#MBProgressHUD" class="headerlink" title="MBProgressHUD"></a>MBProgressHUD</h4><p>丰富的活动提示器，可以提示用户程序当前正在工作。</p>
+<h4 id="将开源项目添加到项目中"><a href="#将开源项目添加到项目中" class="headerlink" title="将开源项目添加到项目中"></a>将开源项目添加到项目中</h4><p>直接将三个开源项目的文件夹分别拖到项目工作区。记得勾选Copy items if needed 与Create groups 还有Add to targets。如下图所示：</p>
+<p><img src="http://7xpbz8.com1.z0.glb.clouddn.com/15-12-20/54209653.jpg" alt="添加开源项目"></p>
+<h4 id="运行程序"><a href="#运行程序" class="headerlink" title="运行程序"></a>运行程序</h4><p>快捷键Command + R 可以在iPhone模拟器中运行你刚刚构建好的项目。</p>
+<p>或者点击左上角的三角符号也可以运行程序。</p>
+<p><img src="http://7xpbz8.com1.z0.glb.clouddn.com/15-12-19/20904333.jpg" alt="运行程序"></p>
+<h4 id="增加新的视图控制器和数据模型类"><a href="#增加新的视图控制器和数据模型类" class="headerlink" title="增加新的视图控制器和数据模型类"></a>增加新的视图控制器和数据模型类</h4><p>选中PageSample项目，单击File\New\File，并且选择Cocoa Touch\Objective-C class. 命名为JWController，并设置为UIViewController的子类。如下图所示：</p>
+<p><img src="http://7xpbz8.com1.z0.glb.clouddn.com/15-12-20/92321984.jpg" alt="创建文件"></p>
+<p>打开JWViewController.m然后用如下所示替换-viewDidLoad方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[super viewDidLoad];</span><br><span class="line"></span><br><span class="line">//设置一个白色的背景</span><br><span class="line">[self.view setBackgroundColor:[UIColor whiteColor]];</span><br></pre></td></tr></table></figure>
+
+<p>接下来再增加一个模型，用来进行从服务器获取数据和对数据进行处理。</p>
+<p>单击File\New\File…并选择Cocoa Touch\Objective-C class。命名为JWGetdata并使其为NSObject的子类。</p>
+<h4 id="创建一个点击会跳转到视图控制器JWViewController的按钮"><a href="#创建一个点击会跳转到视图控制器JWViewController的按钮" class="headerlink" title="创建一个点击会跳转到视图控制器JWViewController的按钮"></a>创建一个点击会跳转到视图控制器JWViewController的按钮</h4><p>打开ViewController.m在文件开头<code>import  JWViewController.h</code>，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;JWViewController.h&quot;</span><br></pre></td></tr></table></figure>
+
+<p>然后用如下所示替换-viewDidLoad方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line"></span><br><span class="line">    //1</span><br><span class="line">    self.view.backgroundColor = [UIColor grayColor];</span><br><span class="line"></span><br><span class="line">    //2</span><br><span class="line">    UIButton *btn = [[UIButton alloc]init];</span><br><span class="line">    [btn setTitle:@&quot;点我跳转&quot; forState:UIControlStateNormal];</span><br><span class="line">    [btn setFrame:CGRectMake(110, 200, 100, 30)];</span><br><span class="line">    [btn addTarget:self action:@selector(jump:) forControlEvents:UIControlEventTouchUpInside];</span><br><span class="line">    [self.view addSubview:btn];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>设置当前视图控制器的视图的背景颜色为灰色。</li>
+<li>在当前视图控制器的视图上增加一个按钮。<ul>
+<li><code>setTitle:(nullable NSString *) forState:(UIControlState)</code> 方法设置标题，对应的状态是<code>UIControlStateNormal</code>。</li>
+<li><code>setFrame:(CGRect *)</code> 方法可以设置按钮所在的坐标和它的尺寸。</li>
+<li><code>addTarget:(nullable id) action:(nonnull SEL) forControlEvents:(UIControlEvents)</code>方法Target是关联到哪个控制器，这里选择<code>self</code>(本控制器)。action填写<code>@selector(jump:)</code>，即是用选择器选择jump方法，因为这是UIButton对象，所以后面的”:”不能少，用来传递本按钮对象。<code>forControlEvents</code>表示这个action在什么事件触发的时候会有响应，这里选择的是<code>UIControlEventTouchUpInside</code>，表示”手指在按钮范围内点触后抬起”。</li>
+<li><em>每个Cocoa框架里面的方法都可以按住Command键再点击方法来查看方法的定义</em></li>
+</ul>
+</li>
+</ol>
+<p>接下来我们写上面按钮关联到的跳转方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (void)jump:(UIButton *)sender &#123;</span><br><span class="line">  JWViewController *jwVC = [[JWViewController alloc] init];</span><br><span class="line">  [self presentViewController:jwVC animated:YES completion:nil];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在启动调试之后第一页应该是这样的：</p>
+<p><img src="http://7xpbz8.com1.z0.glb.clouddn.com/15-12-28/10157889.jpg" alt="首页预览"></p>
+<p>打开JWViewController.m在文件开头import需要的开源项目，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;UIImageView+WebCache.h&quot;	//用于异步加载网络图片</span><br><span class="line">#import &quot;AFNetworking/AFNetworking/AFNetworking.h&quot;	//用于网络请求</span><br></pre></td></tr></table></figure>
+
+<p>然后用如下所示替换-viewDidLoad方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line"></span><br><span class="line">    //设置一个白色的背景</span><br><span class="line">    [self.view setBackgroundColor:[UIColor whiteColor]];</span><br><span class="line"></span><br><span class="line">    //1</span><br><span class="line">    UIView *statueBarBGView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 23)];</span><br><span class="line">    [statueBarBGView setBackgroundColor:[UIColor colorWithRed:249/255.0 green:249/255.0 blue:249/255.0 alpha:1.0]];</span><br><span class="line">    [self.view addSubview:statueBarBGView];</span><br><span class="line"></span><br><span class="line">    //增加一个导航栏</span><br><span class="line">    UINavigationBar *navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 22, 320, 44)];</span><br><span class="line">    [self.view addSubview:navbar];</span><br><span class="line"></span><br><span class="line">    //2		增加一个关闭视图按钮</span><br><span class="line">    UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 46, 30)];</span><br><span class="line">    [closeBtn setTitle:@&quot;关闭&quot; forState:UIControlStateNormal];</span><br><span class="line">    [closeBtn setTitleColor:[UIColor colorWithRed:0 green:145/255.0 blue:255/255.0 alpha:1.0] forState:UIControlStateNormal];</span><br><span class="line">    [closeBtn addTarget:self action:@selector(closeView:) forControlEvents:UIControlEventTouchUpInside];</span><br><span class="line">    [navbar addSubview:closeBtn];</span><br><span class="line"></span><br><span class="line">  //增加一个导航栏标题</span><br><span class="line">    UILabel *titleLab = [[UILabel alloc] init];</span><br><span class="line">    titleLab.text = @&quot;问题详情&quot;;</span><br><span class="line">    titleLab.frame = CGRectMake(129, 15, 69, 21);</span><br><span class="line">    [navbar addSubview:titleLab];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>通过放一个与下面增加的NavBar同样颜色的view在状态栏的地方来曲线救国达到修改StatusBar背景颜色。</li>
+<li>在这段代码后面是<code>[navbar addSubview:closeBtn]</code> 说明这个对象是加到navbar里面去，成为了navbar的子成员。</li>
+</ol>
+<p>接下来我们写上面按钮关联到的关闭窗体的方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (void)closeView:(UIButton *)sender &#123;</span><br><span class="line">    [self dismissViewControllerAnimated:YES completion:nil];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来是看看点击”点我跳转”按钮之后跳转到的界面:</p>
+<p><img src="http://7xpbz8.com1.z0.glb.clouddn.com/15-12-28/10556680.jpg" alt="点我跳转"></p>
+<p>到这里我们的基本框架算是有了，但是上面的构建程序的方法并不是值得提倡的，深入学习之后你会发现上面的做法极其低效，尽管上面的写法很繁琐，但是这有助于没有iOS开发基础的认识到如何利用OC进行iOS开发。</p>
+<h4 id="构建我们的视图"><a href="#构建我们的视图" class="headerlink" title="构建我们的视图"></a>构建我们的视图</h4><p>我们继续在JWViewController.m文件下编写代码。</p>
+<p>我们接下来在写一个方法来构建我们的界面:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark - 构建视图</span><br><span class="line">- (void)setupView &#123;</span><br><span class="line">    //  用户头像</span><br><span class="line">    _userHeaderImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 5, 50, 50)];</span><br><span class="line">    _userHeaderImage.backgroundColor = [UIColor clearColor];</span><br><span class="line">    CALayer *layer = [_userHeaderImage layer];</span><br><span class="line">    [layer setMasksToBounds:YES];</span><br><span class="line">    [layer setCornerRadius:25.0];</span><br><span class="line">    [self.view addSubview:_userHeaderImage];</span><br><span class="line"></span><br><span class="line">    //  用户名</span><br><span class="line">    _userNameLbl = [[UILabel alloc] initWithFrame:CGRectMake(20 + 50 + 20, 5, 320 - 120, 50/2)];</span><br><span class="line">    _userNameLbl.textAlignment = NSTextAlignmentLeft;</span><br><span class="line">    _userNameLbl.font = [UIFont systemFontOfSize:15.0];</span><br><span class="line">    _userNameLbl.textColor = [UIColor colorWithRed:62/255.0 green:79/255.0 blue:125/255.0 alpha:1.0];</span><br><span class="line">    [self.view addSubview:_userNameLbl];</span><br><span class="line"></span><br><span class="line">    //  个人资料</span><br><span class="line">    _userIntroLbl = [[UILabel alloc] initWithFrame:CGRectMake(20 + 50 + 20, 5 + 50/2 , 320 - 120, 50/2)];</span><br><span class="line">    _userIntroLbl.numberOfLines = 1;</span><br><span class="line">    _userIntroLbl.font = [UIFont systemFontOfSize:14.0];</span><br><span class="line">    _userIntroLbl.textColor = [UIColor grayColor];</span><br><span class="line">    [self.view addSubview:_userIntroLbl];</span><br><span class="line"></span><br><span class="line">    //  内容label</span><br><span class="line">    _contentLbl = [[UILabel alloc] init];</span><br><span class="line">    _contentLbl.numberOfLines = 0;</span><br><span class="line">    _contentLbl.font = [UIFont systemFontOfSize:15.0];</span><br><span class="line">    [self.view addSubview:_contentLbl];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再将<code>[self setupView];</code> 放到<code>[navbar addSubview:titleLab];</code>之后。这样子就将基本需要的东西都放上去了，不过我们还没填充内容，所以界面上并没有变化。</p>
+<h4 id="数据请求与处理"><a href="#数据请求与处理" class="headerlink" title="数据请求与处理"></a>数据请求与处理</h4><p>接下来我们就从网络的接口取回数据并且填充到上面构建的视图中。为了避免回调的语法，我们暂且将数据请求的方法也写在JWViewControll.m中。</p>
+<p>我们先在JWViewControll.m的开头声明几个需要用到的对象当作数据模型:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@interface JWViewController ()</span><br><span class="line"></span><br><span class="line">/** 用户头像 */</span><br><span class="line">@property (nonatomic, strong) UIImageView *userHeaderImage;</span><br><span class="line"></span><br><span class="line">/** 用户名 */</span><br><span class="line">@property (nonatomic, strong) UILabel *userNameLbl;</span><br><span class="line"></span><br><span class="line">/** 用户资料 */</span><br><span class="line">@property (nonatomic, strong) UILabel *userIntroLbl;</span><br><span class="line"></span><br><span class="line">/** 问题内容 */</span><br><span class="line">@property (nonatomic, strong) UILabel *contentLbl;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+
+<p>我们的网络请求将会用到的接口<code>https://ucqa.dawnlightning.com/capi/space.php?uid=29&amp;do=bwzt&amp;id=116</code>，返回的是JSON格式的数据:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"code"</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"data"</span>: &#123;</span><br><span class="line">    <span class="attr">"bwzt"</span>: &#123;</span><br><span class="line">      <span class="attr">"message"</span>: <span class="string">"眼睛干干，难睁开"</span>,</span><br><span class="line">      <span class="attr">"username"</span>: <span class="string">"13650458186"</span>,</span><br><span class="line">      <span class="attr">"subject"</span>: <span class="string">"有什么好用的眼药水推荐"</span>,</span><br><span class="line">      <span class="attr">"sex"</span>: <span class="string">"男"</span>,</span><br><span class="line">      <span class="attr">"age"</span>: <span class="string">"21"</span>,</span><br><span class="line">      <span class="attr">"dateline"</span>: <span class="string">"1451123548"</span>,</span><br><span class="line">      <span class="attr">"status"</span>: <span class="string">"0"</span>,</span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"雨梦"</span>,</span><br><span class="line">      <span class="attr">"avatar_url"</span>: <span class="string">"https://ucqa.dawnlightning.com/ucenter/data/avatar/000/00/00/29_avatar_middle.jpg"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"msg"</span>: <span class="string">"进行的操作完成了"</span>,</span><br><span class="line">  <span class="attr">"action"</span>: <span class="string">"do_success"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们根据上面的JSON接口写我们的获取数据和设置内容的方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark - 网络请求和数据处理</span><br><span class="line">- (void)requestAndSetupData &#123;</span><br><span class="line">    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];</span><br><span class="line">    NSString *url = @&quot;https://ucqa.dawnlightning.com/capi/space.php?uid=29&amp;do=bwzt&amp;id=116&quot;;</span><br><span class="line">    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) &#123;</span><br><span class="line"></span><br><span class="line">        NSData *html = operation.responseData;</span><br><span class="line">        NSDictionary *backJSON = [NSJSONSerialization JSONObjectWithData:html options:NSJSONReadingMutableLeaves error:nil];</span><br><span class="line"></span><br><span class="line">        //result &quot;0&quot;是成功， &quot;1&quot;是失败</span><br><span class="line">        NSNumber *result = [backJSON valueForKey:@&quot;code&quot;];</span><br><span class="line">        if ([result isEqualToNumber:[NSNumber numberWithInt:1]]) &#123;</span><br><span class="line">            NSLog(@&quot;获取数据失败&quot;);</span><br><span class="line"></span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            NSLog(@&quot;获取数据成功&quot;);</span><br><span class="line"></span><br><span class="line">            //获得数据</span><br><span class="line">            NSDictionary *data = [backJSON objectForKey:@&quot;data&quot;];</span><br><span class="line">            NSDictionary *bwzt = [data objectForKey:@&quot;bwzt&quot;];</span><br><span class="line">            NSString *name = [bwzt objectForKey:@&quot;name&quot;];</span><br><span class="line">            NSString *sex = [bwzt objectForKey:@&quot;sex&quot;];</span><br><span class="line">            NSString *age = [bwzt objectForKey:@&quot;age&quot;];</span><br><span class="line">            NSURL *headimageURL = [NSURL URLWithString:[bwzt objectForKey:@&quot;avatar_url&quot;]];</span><br><span class="line">            NSString *content = [bwzt objectForKey:@&quot;message&quot;];</span><br><span class="line"></span><br><span class="line">            //设置内容</span><br><span class="line">            _userNameLbl.text = name;</span><br><span class="line">            _userIntroLbl.text = [NSString stringWithFormat:@&quot;性别:%@  年龄:%@&quot;, sex, age];</span><br><span class="line">            [_userHeaderImage sd_setImageWithURL:headimageURL];</span><br><span class="line"></span><br><span class="line">            //设置contentLbl内容，并且多行显示内容</span><br><span class="line">            CGSize labelSize = &#123;0, 0&#125;;</span><br><span class="line">            labelSize = [content sizeWithFont:[UIFont systemFontOfSize:15]</span><br><span class="line"></span><br><span class="line">                             constrainedToSize:CGSizeMake(280.0, 5000)</span><br><span class="line"></span><br><span class="line">                                 lineBreakMode:UILineBreakModeWordWrap];</span><br><span class="line">            _contentLbl.frame = CGRectMake(20, 140, 280, labelSize.height);</span><br><span class="line">            _contentLbl.text = content;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;failure:^(AFHTTPRequestOperation *operation, NSError *error) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再将<code>[self setupView];</code> 放到<code>[self requestAndSetupData];</code>之后运行程序便可以看到以下的效果。</p>
+<p><img src="http://7xpbz8.com1.z0.glb.clouddn.com/15-12-29/83655293.jpg" alt="最终效果"></p>
+<p>到这里我们的小demo就结束了。开始你的iOS开发之旅吧。</p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href= "/2016/01/20/2016-01-20-内存管理/" title= OC内存管理 >
+                    <span>Next Post</span>
+                    <span>OC内存管理</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href= "/2015/12/13/2015-12-13-App-发布过程/" title= iOS App 发布过程 >
+                    <span>Previous Post</span>
+                    <span>iOS App 发布过程</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <script data-isso= http://comment.toonow.cc/ src= http://comment.toonow.cc/js/embed.min.js></script>
+    <section id="isso-thread"></section>
+    
+
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:toono@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/ToonoW" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="//twitter.com/toono_w" class="iconfont-archer twitter" target="_blank" title="twitter"></a>
+            
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#大纲"><span class="toc-number">2.</span> <span class="toc-text">大纲</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正文"><span class="toc-number">3.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#开发准备介绍"><span class="toc-number">3.1.</span> <span class="toc-text">开发准备介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Objective-C语法简易简介"><span class="toc-number">3.2.</span> <span class="toc-text">Objective-C语法简易简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开始"><span class="toc-number">3.3.</span> <span class="toc-text">开始</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Cocoapods"><span class="toc-number">3.3.1.</span> <span class="toc-text">Cocoapods</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AFNetworking"><span class="toc-number">3.3.2.</span> <span class="toc-text">AFNetworking</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SDWebImage"><span class="toc-number">3.3.3.</span> <span class="toc-text">SDWebImage</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MBProgressHUD"><span class="toc-number">3.3.4.</span> <span class="toc-text">MBProgressHUD</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#将开源项目添加到项目中"><span class="toc-number">3.3.5.</span> <span class="toc-text">将开源项目添加到项目中</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运行程序"><span class="toc-number">3.3.6.</span> <span class="toc-text">运行程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#增加新的视图控制器和数据模型类"><span class="toc-number">3.3.7.</span> <span class="toc-text">增加新的视图控制器和数据模型类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建一个点击会跳转到视图控制器JWViewController的按钮"><span class="toc-number">3.3.8.</span> <span class="toc-text">创建一个点击会跳转到视图控制器JWViewController的按钮</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构建我们的视图"><span class="toc-number">3.3.9.</span> <span class="toc-text">构建我们的视图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据请求与处理"><span class="toc-number">3.3.10.</span> <span class="toc-text">数据请求与处理</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header sidebar-header-show-archive">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 35 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/06</span><a class="archive-post-title" href= "/2017/01/06/2017-01-06-Perfect-Assistant-让你的服务端开发更便捷/" >Perfect Assistant 让你的服务器开发更便捷</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2017/01/04/2017-01-04-PyQt4-Box-Layout-布局/" >PyQt4 Box Layout 布局</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2016 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/27</span><a class="archive-post-title" href= "/2016/12/27/2016-12-27-(译)PyQt_-Threading-线程基础教程/" >(译)PyQt Threading 线程基础教程</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/20</span><a class="archive-post-title" href= "/2016/12/20/2016-12-20-(译)Python-多线程-socket-代码实战/" >(译)Python 多线程 socket 代码实战</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/18</span><a class="archive-post-title" href= "/2016/12/18/2016-12-18-swift学习笔记【1】/" >swift学习笔记【1】</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/12</span><a class="archive-post-title" href= "/2016/12/12/2016-12-12-Python开发周记【一】/" >Python开发周记【一】</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/02</span><a class="archive-post-title" href= "/2016/12/02/2016-12-02-Core-Bluetooth-编程指南(二)-Core-Bluetooth-概览/" >Core Bluetooth 编程指南(二)  Core Bluetooth 概览</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/29</span><a class="archive-post-title" href= "/2016/11/29/2016-11-29-Core-Bluetooth-编程指南(一)-基本介绍/" >Core Bluetooth 编程指南(一)  基本介绍</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2016/11/14/2016-11-14-URLSession文档学习/" >NSURLSession阅读文档笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/23</span><a class="archive-post-title" href= "/2016/08/23/2016-08-23--从一组数中寻找第k大的元素/" >从一组数中寻找第k大的元素</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/10</span><a class="archive-post-title" href= "/2016/08/10/2016-08-10--(译)为什么SDWebImage比其他的图片下载组件更好_/" >(译)为什么SDWebImage比其他的图片下载组件更好</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/31</span><a class="archive-post-title" href= "/2016/05/31/2016-05-31--(译)UITableViewCell中嵌套UICollectionView/" >(译)UITableViewCell中嵌套UICollectionView</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span><a class="archive-post-title" href= "/2016/04/08/2016-04-08-读《人月神话》/" >读《人月神话》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span><a class="archive-post-title" href= "/2016/03/06/2016-03-06--Flask-速记/" >Flask 速记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/05</span><a class="archive-post-title" href= "/2016/03/05/2016-03-05--在Ubuntu_Debian-上装Pillow/" >在Ubuntu/Debian 上装Pillow</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/03</span><a class="archive-post-title" href= "/2016/03/03/2016-03-03--临床医学概要/" >临床医学概要</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/28</span><a class="archive-post-title" href= "/2016/02/28/2016-02-28--Django-常用对象路径/" >Django 常用对象路径</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/11</span><a class="archive-post-title" href= "/2016/02/11/2016-02-11--写给大家看的设计书-读书笔记/" >写给大家看的设计书 读书笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/10</span><a class="archive-post-title" href= "/2016/02/10/2016-02-10--Django-Database/" >Django Database Setting</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/08</span><a class="archive-post-title" href= "/2016/02/08/2016-02-08--Django-杂记/" >Django 杂记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/29</span><a class="archive-post-title" href= "/2016/01/29/2016-01-29--@property-参数/" >property 参数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/28</span><a class="archive-post-title" href= "/2016/01/28/2016-01-28--Django-开发实用对象/" >Django 开发实用对象</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/28</span><a class="archive-post-title" href= "/2016/01/28/2016-01-28-Github的git的功能理解/" >Github的git功能的理解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/28</span><a class="archive-post-title" href= "/2016/01/28/2016-01-28-Python-学习记录/" >Python 学习记录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2016/01/25/2016-01-25-Flask-web开发环境准备/" >Flask web开发环境准备</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2016/01/25/2016-01-25-Flask项目基本目录结构/" >Flask 项目基本目录结构</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/20</span><a class="archive-post-title" href= "/2016/01/20/2016-01-20-内存管理/" >OC内存管理</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2015 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/16</span><a class="archive-post-title" href= "/2015/12/16/2015-12-16-iOS开发简单全流程/" >iOS开发简单全流程</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2015/12/13/2015-12-13-App-发布过程/" >iOS App 发布过程</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/09</span><a class="archive-post-title" href= "/2015/12/09/2015-12-09-iOS-第三方收集/" >iOS 第三方收集</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/07</span><a class="archive-post-title" href= "/2015/12/07/2015-12-07-Homebrew-使用记录/" >Homebrew 使用记录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/07</span><a class="archive-post-title" href= "/2015/12/07/2015-12-07-资源收集/" >资源收集</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/06</span><a class="archive-post-title" href= "/2015/12/06/2015-12-06-iOS开发周记-1/" >iOS开发周记 1</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/04</span><a class="archive-post-title" href= "/2015/12/04/2015-12-04-Python-正则表达式/" >Python 正则表达式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/04</span><a class="archive-post-title" href= "/2015/12/04/2015-12-04-Python-面向对象/" >Python 面向对象学习笔记</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+

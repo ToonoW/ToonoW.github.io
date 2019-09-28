@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html>
+    <head><meta name="generator" content="Hexo 3.9.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>
+        
+        swift学习笔记【1】 · 快乐的鲸鱼
+        
+    </title>
+    <link rel="icon" href="/favicon.ico">
+    <!-- TODO: 在font-face加载完毕后改变字体  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
+    <!-- 提前加载place holder  -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url(/font/Oswald-Regular.ttf);
+        }
+    </style>
+    <style type="text/css">
+        .site-intro-placeholder {
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0px;
+            width: calc(100% + 300px);
+            height: 100%;
+            background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+            background-position: center center;
+            transform: translate3d(-226px, 0, 0);
+            animation: gradient-move 2.5s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+    <link rel="stylesheet" href="/css/style.css?v=20171020">
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >快乐的鲸鱼</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">swift学习笔记【1】</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>快乐的鲸鱼</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            swift学习笔记【1】
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2016/12/18</span>
+            </div>
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            var browser = {
+                    versions: function () {
+                        var u = window.navigator.userAgent;
+                        return {
+                            userAgent: u,
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否为iPad
+                            webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+                            weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+                            uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+                        };
+                    }()
+                }
+
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                        if (postIntroTags) {
+                            postIntroTags.classList.add('post-fade-in');
+                        }
+                        if (postIntroMeat) {
+                            postIntroMeat.classList.add('post-fade-in');
+                        }
+                    }
+                }
+                
+            console.log("userAgent:" + browser.versions.userAgent);
+            // UC不支持跨域，所以直接显示
+            if (browser.versions.uc) {
+                console.log("UCBrowser");
+                fontLoaded();
+            } else {
+                WebFont.load({
+                    custom: {
+                        families: ['Oswald-Regular']
+                    },
+                    loading: function () {  //所有字体开始加载
+                        // console.log('loading');
+                    },
+                    active: function () {  //所有字体已渲染
+                        fontLoaded();
+                    },
+                    inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                        console.log('inactive: timeout');
+                        fontLoaded();
+                    },
+                    timeout: 7000 // Set the timeout to two seconds
+                });
+            }
+        </script>
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="基础部分"><a href="#基础部分" class="headerlink" title="基础部分"></a>基础部分</h1><blockquote>
+<p>笔记。多摘抄于<a href="http://wiki.jikexueyuan.com/project/swift/chapter2/01_The_Basics.html" target="_blank" rel="noopener">The Swift Programming Language 中文版</a></p>
+</blockquote>
+<h3 id="声明常量和变量"><a href="#声明常量和变量" class="headerlink" title="声明常量和变量"></a>声明常量和变量</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> maxNumberOfUsers = <span class="number">10</span></span><br><span class="line"><span class="keyword">var</span> currentUser = <span class="string">"Jim"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="类型标注"><a href="#类型标注" class="headerlink" title="类型标注"></a>类型标注</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> welcomeMessage: <span class="type">String</span></span><br><span class="line">welcomeMessage = <span class="string">"Hello"</span></span><br><span class="line"><span class="keyword">var</span> red, green, blue: <span class="type">Double</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="输出常量和变量"><a href="#输出常量和变量" class="headerlink" title="输出常量和变量"></a>输出常量和变量</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">"Jim"</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"Hello, \(name)"</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><p>需要显式转换数据类型</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num1: <span class="type">Uint8</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">let</span> num2: <span class="type">Double</span> = <span class="type">Double</span>(num1)</span><br></pre></td></tr></table></figure>
+
+<h3 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h3><p>元组可作为方法的返回值，一次返回多个数据。或者普通的传参使用。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 元组的创建</span></span><br><span class="line"><span class="keyword">let</span> http404Error = (<span class="number">404</span>, <span class="string">"Not Found"</span>)</span><br><span class="line"><span class="comment">// http404Error 的类型是 (Int, String)，值是 (404, "Not Found")</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 元组的内容分解</span></span><br><span class="line"><span class="keyword">let</span> (statusCode, statusMessage) = http404Error</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"The status code is \(statusCode)"</span>)</span><br><span class="line"><span class="comment">// 只需要一部分元组值，分解的时候可以把要忽略的部分用下划线（_）标记</span></span><br><span class="line"><span class="keyword">let</span> (justTheStatusCode, <span class="number">_</span>) = http404Error</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"The status code is \(justTheStatusCode)"</span>)</span><br><span class="line"><span class="comment">// 可以通过下标来访问元组中的单个元素</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">"The status code is \(http404Error.0)"</span>)</span><br><span class="line"><span class="comment">// 可以在定义元组的时候给单个元素命名</span></span><br><span class="line"><span class="keyword">let</span> http200Status = (statusCode: <span class="number">200</span>, description: <span class="string">"OK"</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"The status code is \(http200Status.statusCode)"</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="可选类型（optionals）"><a href="#可选类型（optionals）" class="headerlink" title="可选类型（optionals）"></a>可选类型<em>（optionals）</em></h3><p>使用可选类型来处理值可能缺失的情况。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> possibleNumber = <span class="string">"123"</span></span><br><span class="line"><span class="keyword">let</span> convertedNumber = <span class="type">Int</span>(possibleNumber)</span><br><span class="line"><span class="comment">// convertedNumber 被推测为类型 "Int?"， 或者类型 "optional Int"</span></span><br><span class="line"><span class="comment">// 因为如果Int()类型转换函数传入的字符串为非法字符串，则会返回nil</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="nil"><a href="#nil" class="headerlink" title="nil"></a>nil</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 可以给可选变量赋值为nil来表示它没有值</span></span><br><span class="line"><span class="keyword">var</span> serverResponseCode: <span class="type">Int?</span> = <span class="number">404</span></span><br><span class="line"><span class="comment">// serverResponseCode 包含一个可选的 Int 值 404</span></span><br><span class="line">serverResponseCode = <span class="literal">nil</span></span><br><span class="line"><span class="comment">// serverResponseCode 现在不包含值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果声明一个可选常量或者变量但是没有赋值，它们会自动被设置为 nil</span></span><br><span class="line"><span class="keyword">var</span> surveyAnswer: <span class="type">String?</span></span><br><span class="line"><span class="comment">// surveyAnswer 被自动设置为 nil</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="if-语句以及强制解析"><a href="#if-语句以及强制解析" class="headerlink" title="if 语句以及强制解析"></a>if 语句以及强制解析</h3><p>用来判断一个可选值是否包含值</p>
+<p>当确定可选类型确实包含值之后，就可以在可选的名字后面加一个感叹号(!)来获取值。这叫做<em>可选值的强制解析**（forced unwrapping）</em></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> convertedNumber != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"convertedNumber has an integer value of \(convertedNumber!)."</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出 "convertedNumber has an integer value of 123."</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="可选绑定（optional-binding）"><a href="#可选绑定（optional-binding）" class="headerlink" title="可选绑定（optional binding）"></a>可选绑定<em>（optional binding）</em></h3><p>可选绑定可以用在 if 和 while 语句中，这条语句不仅可以用来判断可选类型中是否有值，同时可以将可选类型中的值赋给一个常量或者变量。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> actualNumber = <span class="type">Int</span>(possibleNumber) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"\'\(possibleNumber)\' has an integer value of \(actualNumber)"</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"\'\(possibleNumber)\' could not be converted to an integer"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出 "'123' has an integer value of 123"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="隐式解析可选类型"><a href="#隐式解析可选类型" class="headerlink" title="隐式解析可选类型"></a>隐式解析可选类型</h3><p>有时候在程序架构中，第一次被赋值之后，可以确定一个可选类型_总会_有值。在这种情况下，每次都要判断和解析可选值是非常低效的，因为可以确定它总会有值。</p>
+<p>这种类型的可选状态被定义为隐式解析可选类型（implicitly unwrapped optionals）。把想要用作可选的类型的后面的问号（String?）改成感叹号（String!）来声明一个隐式解析可选类型。</p>
+<p>隐式解析可选类型主要被用在 Swift 中类的构造过程中。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> possibleString: <span class="type">String?</span> = <span class="string">"An optional string."</span></span><br><span class="line"><span class="keyword">let</span> forcedString: <span class="type">String</span> = possibleString! <span class="comment">// 需要感叹号来获取值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> assumedString: <span class="type">String!</span> = <span class="string">"An implicitly unwrapped optional string."</span></span><br><span class="line"><span class="keyword">let</span> implicitString: <span class="type">String</span> = assumedString  <span class="comment">// 不需要感叹号</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="空合运算符（Nil-Coalescing-Operator）"><a href="#空合运算符（Nil-Coalescing-Operator）" class="headerlink" title="空合运算符（Nil Coalescing Operator）"></a>空合运算符（Nil Coalescing Operator）</h3><p><em>空合运算符</em>（a ?? b）将对可选类型 a 进行空判断，如果 a 包含一个值就进行解封，否则就返回一个默认值 b。表达式 a 必须是 Optional 类型。默认值 b 的类型必须要和 a 存储值的类型保持一致。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let defaultColorName = &quot;red&quot;</span><br><span class="line">var userDefinedColorName: String?   //默认值为 nil</span><br><span class="line"></span><br><span class="line">var colorNameToUse = userDefinedColorName ?? defaultColorName</span><br><span class="line">// userDefinedColorName 的值为空，所以 colorNameToUse 的值为 &quot;red&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="区间运算符（Range-Operators）"><a href="#区间运算符（Range-Operators）" class="headerlink" title="区间运算符（Range Operators）"></a>区间运算符（Range Operators）</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 闭区间运算符</span></span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> <span class="number">1</span>...<span class="number">5</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"\(index) * 5 = \(index * 5)"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 半开区间运算符</span></span><br><span class="line"><span class="keyword">let</span> names = [<span class="string">"Anna"</span>, <span class="string">"Alex"</span>, <span class="string">"Brian"</span>, <span class="string">"Jack"</span>]</span><br><span class="line"><span class="keyword">let</span> <span class="built_in">count</span> = names.<span class="built_in">count</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="built_in">count</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"第 \(i + 1) 个人叫 \(names[i])"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="集合类型-Collection-Types"><a href="#集合类型-Collection-Types" class="headerlink" title="集合类型 (Collection Types)"></a>集合类型 (Collection Types)</h1><h2 id="数组-Arrays"><a href="#数组-Arrays" class="headerlink" title="数组(Arrays)"></a>数组(Arrays)</h2><p>一个数组只能存放同一类型的数据</p>
+<h3 id="创建一个空数组"><a href="#创建一个空数组" class="headerlink" title="创建一个空数组"></a>创建一个空数组</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> someInts = [<span class="type">Int</span>]()</span><br><span class="line">someInts.append(<span class="number">3</span>)</span><br><span class="line"><span class="comment">// someInts 现在包含一个 Int 值</span></span><br><span class="line">someInts = []</span><br><span class="line"><span class="comment">// someInts 现在是空数组，但是仍然是 [Int] 类型的</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="创建一个带有默认值的数组"><a href="#创建一个带有默认值的数组" class="headerlink" title="创建一个带有默认值的数组"></a>创建一个带有默认值的数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var threeDoubles = Array(repeating: 0.0, count: 3)</span><br><span class="line">// threeDoubles 是一种 [Double] 数组，等价于 [0.0, 0.0, 0.0]</span><br></pre></td></tr></table></figure>
+
+<h3 id="用数组字面量构造数组"><a href="#用数组字面量构造数组" class="headerlink" title="用数组字面量构造数组"></a>用数组字面量构造数组</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> shoppingList: [<span class="type">String</span>] = [<span class="string">"Eggs"</span>, <span class="string">"Milk"</span>]</span><br><span class="line"><span class="comment">// shoppingList 已经被构造并且拥有两个初始项。</span></span><br><span class="line"><span class="comment">// 这个例子中可以省略数据类型，swift可以推断出数据类型</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="控制流（Control-Flow）"><a href="#控制流（Control-Flow）" class="headerlink" title="控制流（Control Flow）"></a>控制流（Control Flow）</h1><h2 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a>Switch</h2><h3 id="区间匹配"><a href="#区间匹配" class="headerlink" title="区间匹配"></a>区间匹配</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> approximateCount = <span class="number">62</span></span><br><span class="line"><span class="keyword">let</span> countedThings = <span class="string">"moons orbiting Saturn"</span></span><br><span class="line"><span class="keyword">var</span> naturalCount: <span class="type">String</span></span><br><span class="line"><span class="keyword">switch</span> approximateCount &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">    naturalCount = <span class="string">"no"</span></span><br><span class="line"><span class="keyword">case</span> <span class="number">1</span>..&lt;<span class="number">5</span>:</span><br><span class="line">    naturalCount = <span class="string">"a few"</span></span><br><span class="line"><span class="keyword">case</span> <span class="number">5</span>..&lt;<span class="number">12</span>:</span><br><span class="line">    naturalCount = <span class="string">"several"</span></span><br><span class="line"><span class="keyword">case</span> <span class="number">12</span>..&lt;<span class="number">100</span>:</span><br><span class="line">    naturalCount = <span class="string">"dozens of"</span></span><br><span class="line"><span class="keyword">case</span> <span class="number">100</span>..&lt;<span class="number">1000</span>:</span><br><span class="line">    naturalCount = <span class="string">"hundreds of"</span></span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">    naturalCount = <span class="string">"many"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"There are \(naturalCount) \(countedThings)."</span>)</span><br><span class="line"><span class="comment">// 输出 "There are dozens of moons orbiting Saturn."</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以使用元组在同一个switch语句中测试多个值。元组中的元素可以是值，也可以是区间。另外，使用下划线（_）来匹配所有可能的值。</p>
+<p>下面的例子展示了如何使用一个(Int, Int)类型的元组来分类下图中的点(x, y)：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> somePoint = (<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"><span class="keyword">switch</span> somePoint &#123;</span><br><span class="line"><span class="keyword">case</span> (<span class="number">0</span>, <span class="number">0</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"(0, 0) is at the origin"</span>)</span><br><span class="line"><span class="keyword">case</span> (<span class="number">_</span>, <span class="number">0</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"(\(somePoint.0), 0) is on the x-axis"</span>)</span><br><span class="line"><span class="keyword">case</span> (<span class="number">0</span>, <span class="number">_</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"(0, \(somePoint.1)) is on the y-axis"</span>)</span><br><span class="line"><span class="keyword">case</span> (-<span class="number">2</span>...<span class="number">2</span>, -<span class="number">2</span>...<span class="number">2</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"(\(somePoint.0), \(somePoint.1)) is inside the box"</span>)</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"(\(somePoint.0), \(somePoint.1)) is outside of the box"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出 "(1, 1) is inside the box"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="值绑定（Value-Bindings）"><a href="#值绑定（Value-Bindings）" class="headerlink" title="值绑定（Value Bindings）"></a>值绑定（Value Bindings）</h3><p>case 分支允许将匹配的值绑定到一个临时的常量或变量，并且在case分支体内使用 —— 这种行为被称为<em>值绑定</em>（value binding），因为匹配的值在case分支体内，与临时的常量或变量绑定。</p>
+<p>下面的例子展示了如何在一个(Int, Int)类型的元组中使用值绑定来分类下图中的点(x, y)：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> anotherPoint = (<span class="number">2</span>, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">switch</span> anotherPoint &#123;</span><br><span class="line"><span class="keyword">case</span> (<span class="keyword">let</span> x, <span class="number">0</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"on the x-axis with an x value of \(x)"</span>)</span><br><span class="line"><span class="keyword">case</span> (<span class="number">0</span>, <span class="keyword">let</span> y):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"on the y-axis with a y value of \(y)"</span>)</span><br><span class="line"><span class="keyword">case</span> <span class="keyword">let</span> (x, y):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"somewhere else at (\(x), \(y))"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出 "on the x-axis with an x value of 2"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Where"><a href="#Where" class="headerlink" title="Where"></a>Where</h3><p>case 分支的模式可以使用where语句来判断额外的条件。</p>
+<p>下面的例子把下图中的点(x, y)进行了分类：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> yetAnotherPoint = (<span class="number">1</span>, -<span class="number">1</span>)</span><br><span class="line"><span class="keyword">switch</span> yetAnotherPoint &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="keyword">let</span> (x, y) <span class="keyword">where</span> x == y:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"(\(x), \(y)) is on the line x == y"</span>)</span><br><span class="line"><span class="keyword">case</span> <span class="keyword">let</span> (x, y) <span class="keyword">where</span> x == -y:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"(\(x), \(y)) is on the line x == -y"</span>)</span><br><span class="line"><span class="keyword">case</span> <span class="keyword">let</span> (x, y):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"(\(x), \(y)) is just some arbitrary point"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出 "(1, -1) is on the line x == -y"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="复合匹配"><a href="#复合匹配" class="headerlink" title="复合匹配"></a>复合匹配</h3><p>当多个条件可以使用同一种方法来处理时，可以将这几种可能放在同一个case后面，并且用逗号隔开。当case后面的任意一种模式匹配的时候，这条分支就会被匹配。并且，如果匹配列表过长，还可以分行书写：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> someCharacter: <span class="type">Character</span> = <span class="string">"e"</span></span><br><span class="line"><span class="keyword">switch</span> someCharacter &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="string">"a"</span>, <span class="string">"e"</span>, <span class="string">"i"</span>, <span class="string">"o"</span>, <span class="string">"u"</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"\(someCharacter) is a vowel"</span>)</span><br><span class="line"><span class="keyword">case</span> <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="string">"f"</span>, <span class="string">"g"</span>, <span class="string">"h"</span>, <span class="string">"j"</span>, <span class="string">"k"</span>, <span class="string">"l"</span>, <span class="string">"m"</span>,</span><br><span class="line">     <span class="string">"n"</span>, <span class="string">"p"</span>, <span class="string">"q"</span>, <span class="string">"r"</span>, <span class="string">"s"</span>, <span class="string">"t"</span>, <span class="string">"v"</span>, <span class="string">"w"</span>, <span class="string">"x"</span>, <span class="string">"y"</span>, <span class="string">"z"</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"\(someCharacter) is a consonant"</span>)</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"\(someCharacter) is not a vowel or a consonant"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出 "e is a vowel"</span></span><br></pre></td></tr></table></figure>
+
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href= "/2016/12/20/2016-12-20-(译)Python-多线程-socket-代码实战/" title= (译)Python 多线程 socket 代码实战 >
+                    <span>Next Post</span>
+                    <span>(译)Python 多线程 socket 代码实战</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href= "/2016/12/12/2016-12-12-Python开发周记【一】/" title= Python开发周记【一】 >
+                    <span>Previous Post</span>
+                    <span>Python开发周记【一】</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <script data-isso= http://comment.toonow.cc/ src= http://comment.toonow.cc/js/embed.min.js></script>
+    <section id="isso-thread"></section>
+    
+
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:toono@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/ToonoW" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="//twitter.com/toono_w" class="iconfont-archer twitter" target="_blank" title="twitter"></a>
+            
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基础部分"><span class="toc-number">1.</span> <span class="toc-text">基础部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#声明常量和变量"><span class="toc-number">1.0.1.</span> <span class="toc-text">声明常量和变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类型标注"><span class="toc-number">1.0.2.</span> <span class="toc-text">类型标注</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#输出常量和变量"><span class="toc-number">1.0.3.</span> <span class="toc-text">输出常量和变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类型转换"><span class="toc-number">1.0.4.</span> <span class="toc-text">类型转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元组"><span class="toc-number">1.0.5.</span> <span class="toc-text">元组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可选类型（optionals）"><span class="toc-number">1.0.6.</span> <span class="toc-text">可选类型（optionals）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nil"><span class="toc-number">1.0.7.</span> <span class="toc-text">nil</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#if-语句以及强制解析"><span class="toc-number">1.0.8.</span> <span class="toc-text">if 语句以及强制解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可选绑定（optional-binding）"><span class="toc-number">1.0.9.</span> <span class="toc-text">可选绑定（optional binding）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#隐式解析可选类型"><span class="toc-number">1.0.10.</span> <span class="toc-text">隐式解析可选类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#空合运算符（Nil-Coalescing-Operator）"><span class="toc-number">1.0.11.</span> <span class="toc-text">空合运算符（Nil Coalescing Operator）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#区间运算符（Range-Operators）"><span class="toc-number">1.0.12.</span> <span class="toc-text">区间运算符（Range Operators）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#集合类型-Collection-Types"><span class="toc-number">2.</span> <span class="toc-text">集合类型 (Collection Types)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组-Arrays"><span class="toc-number">2.1.</span> <span class="toc-text">数组(Arrays)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个空数组"><span class="toc-number">2.1.1.</span> <span class="toc-text">创建一个空数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个带有默认值的数组"><span class="toc-number">2.1.2.</span> <span class="toc-text">创建一个带有默认值的数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用数组字面量构造数组"><span class="toc-number">2.1.3.</span> <span class="toc-text">用数组字面量构造数组</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#控制流（Control-Flow）"><span class="toc-number">3.</span> <span class="toc-text">控制流（Control Flow）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Switch"><span class="toc-number">3.1.</span> <span class="toc-text">Switch</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#区间匹配"><span class="toc-number">3.1.1.</span> <span class="toc-text">区间匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#值绑定（Value-Bindings）"><span class="toc-number">3.1.2.</span> <span class="toc-text">值绑定（Value Bindings）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Where"><span class="toc-number">3.1.3.</span> <span class="toc-text">Where</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复合匹配"><span class="toc-number">3.1.4.</span> <span class="toc-text">复合匹配</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header sidebar-header-show-archive">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 35 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/06</span><a class="archive-post-title" href= "/2017/01/06/2017-01-06-Perfect-Assistant-让你的服务端开发更便捷/" >Perfect Assistant 让你的服务器开发更便捷</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2017/01/04/2017-01-04-PyQt4-Box-Layout-布局/" >PyQt4 Box Layout 布局</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2016 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/27</span><a class="archive-post-title" href= "/2016/12/27/2016-12-27-(译)PyQt_-Threading-线程基础教程/" >(译)PyQt Threading 线程基础教程</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/20</span><a class="archive-post-title" href= "/2016/12/20/2016-12-20-(译)Python-多线程-socket-代码实战/" >(译)Python 多线程 socket 代码实战</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/18</span><a class="archive-post-title" href= "/2016/12/18/2016-12-18-swift学习笔记【1】/" >swift学习笔记【1】</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/12</span><a class="archive-post-title" href= "/2016/12/12/2016-12-12-Python开发周记【一】/" >Python开发周记【一】</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/02</span><a class="archive-post-title" href= "/2016/12/02/2016-12-02-Core-Bluetooth-编程指南(二)-Core-Bluetooth-概览/" >Core Bluetooth 编程指南(二)  Core Bluetooth 概览</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/29</span><a class="archive-post-title" href= "/2016/11/29/2016-11-29-Core-Bluetooth-编程指南(一)-基本介绍/" >Core Bluetooth 编程指南(一)  基本介绍</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2016/11/14/2016-11-14-URLSession文档学习/" >NSURLSession阅读文档笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/23</span><a class="archive-post-title" href= "/2016/08/23/2016-08-23--从一组数中寻找第k大的元素/" >从一组数中寻找第k大的元素</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/10</span><a class="archive-post-title" href= "/2016/08/10/2016-08-10--(译)为什么SDWebImage比其他的图片下载组件更好_/" >(译)为什么SDWebImage比其他的图片下载组件更好</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/31</span><a class="archive-post-title" href= "/2016/05/31/2016-05-31--(译)UITableViewCell中嵌套UICollectionView/" >(译)UITableViewCell中嵌套UICollectionView</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span><a class="archive-post-title" href= "/2016/04/08/2016-04-08-读《人月神话》/" >读《人月神话》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span><a class="archive-post-title" href= "/2016/03/06/2016-03-06--Flask-速记/" >Flask 速记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/05</span><a class="archive-post-title" href= "/2016/03/05/2016-03-05--在Ubuntu_Debian-上装Pillow/" >在Ubuntu/Debian 上装Pillow</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/03</span><a class="archive-post-title" href= "/2016/03/03/2016-03-03--临床医学概要/" >临床医学概要</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/28</span><a class="archive-post-title" href= "/2016/02/28/2016-02-28--Django-常用对象路径/" >Django 常用对象路径</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/11</span><a class="archive-post-title" href= "/2016/02/11/2016-02-11--写给大家看的设计书-读书笔记/" >写给大家看的设计书 读书笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/10</span><a class="archive-post-title" href= "/2016/02/10/2016-02-10--Django-Database/" >Django Database Setting</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/08</span><a class="archive-post-title" href= "/2016/02/08/2016-02-08--Django-杂记/" >Django 杂记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/29</span><a class="archive-post-title" href= "/2016/01/29/2016-01-29--@property-参数/" >property 参数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/28</span><a class="archive-post-title" href= "/2016/01/28/2016-01-28--Django-开发实用对象/" >Django 开发实用对象</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/28</span><a class="archive-post-title" href= "/2016/01/28/2016-01-28-Github的git的功能理解/" >Github的git功能的理解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/28</span><a class="archive-post-title" href= "/2016/01/28/2016-01-28-Python-学习记录/" >Python 学习记录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2016/01/25/2016-01-25-Flask-web开发环境准备/" >Flask web开发环境准备</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2016/01/25/2016-01-25-Flask项目基本目录结构/" >Flask 项目基本目录结构</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/20</span><a class="archive-post-title" href= "/2016/01/20/2016-01-20-内存管理/" >OC内存管理</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2015 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/16</span><a class="archive-post-title" href= "/2015/12/16/2015-12-16-iOS开发简单全流程/" >iOS开发简单全流程</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2015/12/13/2015-12-13-App-发布过程/" >iOS App 发布过程</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/09</span><a class="archive-post-title" href= "/2015/12/09/2015-12-09-iOS-第三方收集/" >iOS 第三方收集</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/07</span><a class="archive-post-title" href= "/2015/12/07/2015-12-07-Homebrew-使用记录/" >Homebrew 使用记录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/07</span><a class="archive-post-title" href= "/2015/12/07/2015-12-07-资源收集/" >资源收集</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/06</span><a class="archive-post-title" href= "/2015/12/06/2015-12-06-iOS开发周记-1/" >iOS开发周记 1</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/04</span><a class="archive-post-title" href= "/2015/12/04/2015-12-04-Python-正则表达式/" >Python 正则表达式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/04</span><a class="archive-post-title" href= "/2015/12/04/2015-12-04-Python-面向对象/" >Python 面向对象学习笔记</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+

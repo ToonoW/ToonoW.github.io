@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html>
+    <head><meta name="generator" content="Hexo 3.9.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>
+        
+        临床医学概要 · 快乐的鲸鱼
+        
+    </title>
+    <link rel="icon" href="/favicon.ico">
+    <!-- TODO: 在font-face加载完毕后改变字体  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
+    <!-- 提前加载place holder  -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url(/font/Oswald-Regular.ttf);
+        }
+    </style>
+    <style type="text/css">
+        .site-intro-placeholder {
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0px;
+            width: calc(100% + 300px);
+            height: 100%;
+            background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+            background-position: center center;
+            transform: translate3d(-226px, 0, 0);
+            animation: gradient-move 2.5s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+    <link rel="stylesheet" href="/css/style.css?v=20171020">
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >快乐的鲸鱼</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">临床医学概要</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>快乐的鲸鱼</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            临床医学概要
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2016/03/03</span>
+            </div>
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            var browser = {
+                    versions: function () {
+                        var u = window.navigator.userAgent;
+                        return {
+                            userAgent: u,
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否为iPad
+                            webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+                            weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+                            uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+                        };
+                    }()
+                }
+
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                        if (postIntroTags) {
+                            postIntroTags.classList.add('post-fade-in');
+                        }
+                        if (postIntroMeat) {
+                            postIntroMeat.classList.add('post-fade-in');
+                        }
+                    }
+                }
+                
+            console.log("userAgent:" + browser.versions.userAgent);
+            // UC不支持跨域，所以直接显示
+            if (browser.versions.uc) {
+                console.log("UCBrowser");
+                fontLoaded();
+            } else {
+                WebFont.load({
+                    custom: {
+                        families: ['Oswald-Regular']
+                    },
+                    loading: function () {  //所有字体开始加载
+                        // console.log('loading');
+                    },
+                    active: function () {  //所有字体已渲染
+                        fontLoaded();
+                    },
+                    inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                        console.log('inactive: timeout');
+                        fontLoaded();
+                    },
+                    timeout: 7000 // Set the timeout to two seconds
+                });
+            }
+        </script>
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="内科"><a href="#内科" class="headerlink" title="内科"></a>内科</h2><h3 id="常见症状"><a href="#常见症状" class="headerlink" title="常见症状"></a>常见症状</h3><h4 id="第一节-发热"><a href="#第一节-发热" class="headerlink" title="第一节  发热"></a>第一节  发热</h4><ol>
+<li><p>正常人的提问一般在<code>36~37℃</code>之间。</p>
+</li>
+<li><p>发热的分度: 高热<code>39.1~41℃</code>。</p>
+</li>
+<li><p>间隔一定时间测量体温，在体温单上标记每次的测量值，将各体温数值点连成体温曲线，该曲线的形状可有一定的规律，称为<code>热型</code>。临床上常见的热型有：<code>稽留热、弛张热、间歇热、波状热、回归热、不规则热</code>。</p>
+</li>
+</ol>
+<h4 id="第四节-发绀"><a href="#第四节-发绀" class="headerlink" title="第四节  发绀"></a>第四节  发绀</h4><ol>
+<li><code>发绀</code>亦称为<code>紫绀</code>，是指血液中<code>脱氧血红蛋白</code>增多，使皮肤、黏膜呈现青紫色的表现。</li>
+<li>根据不同的临床表现和病因，发绀可分为<code>中心性、周围性、混合性</code>三种发绀。</li>
+<li><code>中心性发绀</code>主要见于有<code>心肺功能不全</code>的疾病、<code>左-右异常分流的先天性心脏病</code>。</li>
+<li>由于大量进食含有<code>亚硝酸盐</code>的变质蔬菜而引起的<code>中毒性高铁血红蛋白白血症</code>。也可以出现发绀，称<code>肠源性青紫症</code>。</li>
+</ol>
+<h4 id="第六节-咳嗽和咳痰"><a href="#第六节-咳嗽和咳痰" class="headerlink" title="第六节  咳嗽和咳痰"></a>第六节  咳嗽和咳痰</h4><p>为判断咳嗽和咳痰的临床意义，应注意下列各点：<code>咳嗽的性质、咳嗽的时间与节律、咳嗽的声音特点、痰的性状和量</code>。   </p>
+<h4 id="第八节-呼吸困难"><a href="#第八节-呼吸困难" class="headerlink" title="第八节  呼吸困难"></a>第八节  呼吸困难</h4><ol>
+<li>呼吸困难是指患者感到<code>空气不足</code>，客观表现为<code>呼吸费力</code>，重者出现<code>鼻翼扇动、张口耸肩、呼吸辅助肌参与活动</code>，甚至出现<code>发绀</code>，并有<code>呼吸频率、深度与节律的异常</code>（如呼吸快而浅、深而慢、间停呼吸等）。</li>
+<li>引起呼吸困难的原因：<code>呼吸系统疾病、心血管系统疾病、中毒性呼吸困难、神经精神性呼吸困难、血液病</code>。</li>
+<li>心血管系统疾病：由于心肌收缩力减退或心室负荷增加，左心室功能减退，搏出量减少，致舒张末期压力升高。继而左房压、肺静脉和毛细血管压力升高，引起肺淤血，血浆成分漏出，导致间质性肺水肿、血管壁增厚，弥散功能障碍。</li>
+<li>夜间阵发性呼吸困难的发生也与肺淤血有关。</li>
+<li>肺源性吸气性呼吸困难特点是吸气费力、呼吸显著困难，重者因吸气肌极度用力，胸腔负压增大，吸气时胸骨上窝、锁骨上窝与各肋间隙明显凹陷，出现<code>三凹症</code>。</li>
+<li>左心功能不全时，可发生夜间阵发性呼吸困难。发作时，病人常于熟睡中突感胸闷憋气惊醒，被迫坐起，惊恐不安，伴有咳嗽，轻者数分钟至数十分钟后症状逐渐减轻、缓解；重者高度气喘，颜面青紫，大汗淋漓，呼吸伴有哮鸣声，甚至咳出或从口腔喷出大量浆液性血性痰或粉红色泡沫样痰，听诊两肺底甚至全肺可闻及<code>湿性啰音</code>，心率加快，有<code>奔马律</code>。此种呼吸困难又称<code>心源性哮喘</code>。</li>
+<li>中毒性呼吸困难：因各种酸中毒所致者多为深长而规律的大呼吸（Kussmaul呼吸），频率或快或慢，不同病因呼出的气体可有尿（氨）味（见于尿毒症）、烂苹果味（见于糖尿病酮症酸中毒）。急性发热性疾病呼吸快速、急促。因血中出现异常血红蛋白衍化物或氰化物中毒者，一般呼吸深快；严重时因脑水肿呼吸中枢受抑制，呼吸表浅、缓慢，与安眠药或麻醉药中毒所致者相似，也可有节律异常，如Cheyne-Stokes呼吸、Biots呼吸。</li>
+</ol>
+<h3 id="体格检查"><a href="#体格检查" class="headerlink" title="体格检查"></a>体格检查</h3><h4 id="第二节-一般检查"><a href="#第二节-一般检查" class="headerlink" title="第二节  一般检查"></a>第二节  一般检查</h4><ol>
+<li>生命征是评估生命活动质量的重要征象，包括<code>体温、脉搏、血压、呼吸</code>，它是及时了解病人情况变化的重要指标之一。</li>
+<li>临床上常见的意识障碍有<code>嗜睡、意识模糊、昏睡、谵妄</code>等。</li>
+<li>局限性淋巴结肿大常见的原因有：<code>感染性淋巴结肿大和恶性肿瘤淋巴结转移</code>。</li>
+</ol>
+<h4 id="第三节-头部检查"><a href="#第三节-头部检查" class="headerlink" title="第三节  头部检查"></a>第三节  头部检查</h4><ol>
+<li>头颅的大小异常或者畸形可成为一些疾病的典型体征。</li>
+<li>咽部及扁桃体检查：应注意<code>咽部黏膜有无充血、水肿、出血、溃疡、咽壁有无滤泡、分泌物及假膜</code>等。应检查<code>扁桃体有无肿大、充血、有无分泌物覆盖</code>。</li>
+</ol>
+<h4 id="第四节-颈部检查"><a href="#第四节-颈部检查" class="headerlink" title="第四节  颈部检查"></a>第四节  颈部检查</h4><ol>
+<li>若取30~45°半卧位时，静脉充盈度超过正常水平，称为<code>颈静脉怒张</code>，提示静脉压增高。见于<code>右心衰竭、缩窄性心包炎、心包积液或上腔静脉阻塞综合症</code>。</li>
+<li>甲状腺肿大可分为三度：不能看出肿大但能触及者为I度；能看见肿大又能触及，但在胸锁骨乳突肌以内者为II度；超过胸锁乳突肌外缘者即为III度。</li>
+</ol>
+<h4 id="第五节-胸部检查"><a href="#第五节-胸部检查" class="headerlink" title="第五节  胸部检查"></a>第五节  胸部检查</h4><ol>
+<li>肺和胸膜的视诊，应注意<code>呼吸运动、呼吸频率、呼吸深度变化</code>。</li>
+<li>当严重代谢性酸中毒时，出现深而漫长的呼吸，见于糖尿病酮症酸中毒和尿毒症酸中毒等，此种深长的呼吸又称为Kussmaul呼吸。</li>
+<li>语音震颤为被检查者发出语音时声波沿器官、支气管及肺泡传到胸壁引起共鸣的震动，可被检查者的手触及，故称为<code>触觉震颤</code>。</li>
+<li>肺前届，即<code>肺尖的宽度</code>，正常为<code>5~6cm</code>。</li>
+<li>正常呼吸音：（1）肺泡呼吸音：为一种叹息样的或柔和吹风样的“fu－fu”声，在大部分肺野内均可听及。（2）支气管呼吸音：颇似抬舌后经口腔呼气时所发出的“ha”的音响。</li>
+<li>异常呼吸音：（1）<code>肺泡呼吸音减弱或消失可出现于胸廓活动受限、呼吸肌疾病、支气管阻塞、压迫性肺膨胀不全，如气胸、大量胸腔积液等</code>。（2）异常支气管呼吸音：如在正常肺泡呼吸音部位听到支气管呼吸音，则为异常的支气管呼吸音，或称<code>管样呼吸音</code>。可见于<code>肺组织实变</code>、肺内大空腔、压迫性肺不张等。</li>
+<li>湿啰音：由于吸气时气体通过呼吸道内的稀薄分泌物渗出液、痰液、血液、黏液、脓液等，形成的水泡破裂所产生的声音，故又称<code>水泡音</code>。</li>
+<li>胸膜摩擦音：胸膜由于<code>炎症</code>，<code>纤维素</code>渗出而变得粗糙时，则随着呼吸便可出现胸模摩擦音。</li>
+<li>正常心尖搏动位置在<code>胸骨左缘第5肋锁骨中线</code>内0.5~1.0cm处。</li>
+<li>触诊时若手指被强有力的心间搏动抬起，这种较大范围增强的外向运动，称为<code>抬举性搏动</code>，这是左心室肥大的可靠体征。</li>
+<li><code>震颤</code>是指用手指触诊时感觉到一种细小的震动，又称为<code>猫喘</code>。</li>
+<li>心浊音改变及其临床意义：<code>心浊音界大小、形态和位置可由于心脏本身病变及心外因素而发生改变</code>。</li>
+<li>心包积液：心界向两侧扩大，极似两侧心室扩大，坐位时心浊音界呈<code>三角形（烧瓶型）</code>，仰卧位时心底部浊音区增宽，这种心浊音界随体位改变而变化是心包积液的特征。</li>
+<li>心脏听诊内容包括<code>心率、心律、心音、额外心音、杂音及心包摩擦音</code>等。</li>
+<li>心音有<code>四个</code>，按出现的先后命名为第一心音（S1）、第二心音（S2）、第三心音（S3）、第四心音（S4）。<code>通常只能听到S1和S2</code>。</li>
+</ol>
+<h3 id="实验室检查"><a href="#实验室检查" class="headerlink" title="实验室检查"></a>实验室检查</h3><h4 id="第一节-临床一般检查"><a href="#第一节-临床一般检查" class="headerlink" title="第一节  临床一般检查"></a>第一节  临床一般检查</h4><ol>
+<li>血红蛋白参考值：<code>成年男性120~160g/L;成年女性110~150g/L;新生儿170~200g/L</code>。</li>
+<li>网织红细胞计数<code>增多表示骨髓红细胞系的增生旺盛</code>。</li>
+<li>红细胞沉降率<code>病理性增快常见于各种炎症性疾病</code>。</li>
+<li>中性粒细胞病理性增多常见于<code>急性感染，特别是化脓性球菌感染</code>。</li>
+<li>尿量：<code>无尿（50~100ml/d），少尿（400ml/d）</code>。</li>
+<li><code>黏液脓血便以黏液脓血为主，可见于细菌性痢疾</code>。</li>
+<li><code>柏油样便见于上消化道出血</code>。</li>
+</ol>
+<h3 id="呼吸系统疾病"><a href="#呼吸系统疾病" class="headerlink" title="呼吸系统疾病"></a>呼吸系统疾病</h3><h4 id="第三节-慢性支气管炎"><a href="#第三节-慢性支气管炎" class="headerlink" title="第三节  慢性支气管炎"></a>第三节  慢性支气管炎</h4><p>慢性支气管炎临床上以<code>咳嗽、咳痰</code>或伴有喘息及反复发作的慢性过程为特征。  </p>
+<h4 id="第四节-慢性阻塞性肺病"><a href="#第四节-慢性阻塞性肺病" class="headerlink" title="第四节  慢性阻塞性肺病"></a>第四节  慢性阻塞性肺病</h4><ol>
+<li><code>COPD（慢性阻塞性肺病）是指一种具有气流受限特征的疾病。</code></li>
+<li><code>肺功能检查是判断气流受限的主要客观指标</code>。</li>
+</ol>
+<h4 id="第五节-慢性肺源性心脏病"><a href="#第五节-慢性肺源性心脏病" class="headerlink" title="第五节  慢性肺源性心脏病"></a>第五节  慢性肺源性心脏病</h4><ol>
+<li>慢性肺源性心脏病是由于慢性肺组织、胸廓、肺动脉及其分支的疾病引起<code>肺循环阻力增加、肺动脉高压</code>、右心室肥厚、扩大、伴或不伴右心衰竭的心脏疾病。<code>病因以慢性阻塞性肺病引起最多见</code>。</li>
+<li>慢性肺源性心脏病<code>肺、心功能失代偿期主要征象是呼吸衰竭伴或不伴心力衰竭</code>。</li>
+</ol>
+<h4 id="第六节-支气管哮喘"><a href="#第六节-支气管哮喘" class="headerlink" title="第六节  支气管哮喘"></a>第六节  支气管哮喘</h4><ol>
+<li>我国支气管哮喘发病率约<code>1%~4%</code>。</li>
+<li>支气管哮喘发作时在双肺可闻及散在或弥散性、以呼吸相为主的<code>哮鸣音</code>、呼吸相延长。</li>
+<li>目前医疗水平，哮喘尚不能根治，但以抑制气道炎为主的规则治疗，可达到<code>控制哮喘急性发作的症状、减少发作、减少住院或急诊</code>等目标。</li>
+</ol>
+<h4 id="第八节-呼吸衰竭"><a href="#第八节-呼吸衰竭" class="headerlink" title="第八节  呼吸衰竭"></a>第八节  呼吸衰竭</h4><ol>
+<li>呼吸衰竭是指各种原因引起的<code>肺通气和／或换气功能障碍</code>，不能进行有效的气体交换，<code>导致缺氧伴或不伴二氧化碳潴留</code>。</li>
+<li>急性呼吸窘迫综合症（ ARDS）发病24小时左右可呈现<code>大白肺</code>。</li>
+<li>ARDS 患者的治疗原则：糖皮质激素使用：<code>早期、短程、足量使用糖皮质激素，越早开始使用越好</code>。</li>
+<li>慢性呼吸衰竭临床表现：<code>动脉气血分析示PaO2&lt;60mmHg，可伴或不伴PaCO2&gt;50mmHg</code>。</li>
+<li>慢性呼吸衰竭治疗：<code>氧疗，I型呼吸衰竭可吸入较高浓度（35%或以上）氧气，II型呼吸衰竭则要低浓度（25%~29%）持续给氧</code>。</li>
+</ol>
+<h3 id="循环系统疾病"><a href="#循环系统疾病" class="headerlink" title="循环系统疾病"></a>循环系统疾病</h3><h4 id="第一节-心力衰竭"><a href="#第一节-心力衰竭" class="headerlink" title="第一节  心力衰竭"></a>第一节  心力衰竭</h4><ol>
+<li>心力衰竭是一种临床综合征，是由于<code>心肌损害</code>或是由于<code>持续性心脏负荷过重</code>使心肌收缩力下降，造成心排血量不能满足机体代谢的需要，器官、组织血液灌注不足，<code>同时出现肺循环和（或）体循环淤血</code>。</li>
+<li>慢性心力衰竭（慢性心衰）患者主要症状为<code>劳力性呼吸困难和下肢浮肿</code>。</li>
+</ol>
+<h4 id="第二节-高血压病"><a href="#第二节-高血压病" class="headerlink" title="第二节  高血压病"></a>第二节  高血压病</h4><ol>
+<li>高血压可分为<code>原发性高血压即高血压病和继发性高血压</code>。</li>
+<li><code>理想血压：收缩压&lt;120mmHg，舒张压&lt;80mmHg</code>。</li>
+<li>降压药物种类繁多，但近年通过大规模临床验证，以下六类药物已被公认为一线首选药：即<code>利尿剂、ß受体阻滞剂、钙拮抗剂、血管紧张素转换酶抑制剂（ACEI）、α受体阻滞剂以及新近问世的血管紧张素II受体拮抗剂</code>。</li>
+</ol>
+<h4 id="第四节-冠心病"><a href="#第四节-冠心病" class="headerlink" title="第四节  冠心病"></a>第四节  冠心病</h4><ol>
+<li><p>冠心病是指冠状动脉发生<code>粥样硬化</code>，伴或不伴血腔内血栓形成或痉挛，造成管腔狭窄或闭塞，引起心肌缺血或坏死的一种心脏疾病。临床上，<code>主要表现为心绞痛和急性心肌梗死</code>。</p>
+</li>
+<li><p>冠心病是一种多因素所致的疾病。已明确的冠心病主要危险因素包括：<code>（1）高胆固醇血症；（2）高血压；（3）吸烟；（4）糖尿病；（5）年龄；（6）遗传家族史；（7）肥胖等</code>。</p>
+</li>
+<li><p>冠心病的临床表现形式多样。归纳起来，大体上可分为五种临床类型：<code>（1）猝死型冠心病；（2）急性心肌梗死；（3）心绞痛；（4）缺血性心肌病；（5）无症状性心肌缺血</code>。</p>
+</li>
+</ol>
+<h3 id="消化系统疾病"><a href="#消化系统疾病" class="headerlink" title="消化系统疾病"></a>消化系统疾病</h3><h4 id="第二节-胃、十二指肠疾病"><a href="#第二节-胃、十二指肠疾病" class="headerlink" title="第二节  胃、十二指肠疾病"></a>第二节  胃、十二指肠疾病</h4><ol>
+<li>消化性溃疡泛指胃肠道黏膜在某种情况下被<code>胃酸／胃蛋白酶</code>消化而造成的溃疡。可发生于<code>食道、胃及十二指肠</code>，也可发生于胃－空肠吻合口附近，以及含有胃黏膜的Meckel憩室内。因为胃溃疡(GU）和十二指肠溃疡(DU)最常见，故一般所谓的消化性溃疡，是指GU和DU。溃疡的黏膜缺损<code>超过黏膜肌层</code>，不同于糜烂。</li>
+<li><code>幽门螺杆菌(HP)</code>感染是消化性溃疡主要病因。</li>
+<li>上腹部疼痛是消化性溃疡的主要症状，具有<code>节律性和周期性</code>的特点。</li>
+<li>消化性溃疡的并发症有：<code>(1)消化道出血；(2)穿孔；(3)幽门梗塞；(4)癌变</code>。</li>
+<li><code>典型的周期性和节律性上腹部疼痛是诊断消化性溃疡的主要线索</code>。</li>
+<li>药物治疗：<code>(1)根除HP治疗；(2)抗酸分泌治疗；(3)保护胃黏膜治疗</code>。</li>
+</ol>
+<h4 id="第五节-肝脏疾病"><a href="#第五节-肝脏疾病" class="headerlink" title="第五节  肝脏疾病"></a>第五节  肝脏疾病</h4><ol>
+<li>肝硬化是各种病因导致肝细胞广泛变性、坏死、再生以及肝脏纤维组织增生而使肝小叶结构破坏、假小叶形成和结节增生。这种结构上的病变，最终导致<code>肝脏功能严重受损和门静脉高压症</code>。</li>
+<li>病毒性肝炎是引起肝硬化的最常见的病因，<code>在我国70%以上的肝硬化由病毒性肝炎引起</code>。</li>
+</ol>
+<h4 id="第八节-胰腺疾病"><a href="#第八节-胰腺疾病" class="headerlink" title="第八节  胰腺疾病"></a>第八节  胰腺疾病</h4><ol>
+<li>急性胰腺炎是胰酶在胰腺内被激活后引起胰腺组织自身消化的化学性炎症，临床以<code>急性上腹痛</code>、恶心、呕吐、发热、<code>血与尿淀粉酶增高</code>为特点。</li>
+<li><code>胆道疾病</code>是引起急性胰腺炎的最主要的原因。</li>
+<li>各种致病因素引发急性胰腺炎的途径虽不同，但却具有共同的发病过程，即<code>胰腺各种消化酶被异常激活而产生胰腺自身消化</code>。</li>
+<li>急性胰腺炎多在患者<code>暴饮暴食或大量饮酒</code>后发病。   </li>
+</ol>
+<h3 id="血液与造血系统疾病"><a href="#血液与造血系统疾病" class="headerlink" title="血液与造血系统疾病"></a>血液与造血系统疾病</h3><h4 id="第一节-红细胞系统疾病"><a href="#第一节-红细胞系统疾病" class="headerlink" title="第一节  红细胞系统疾病"></a>第一节  红细胞系统疾病</h4><ol>
+<li>缺铁性贫血是体内贮存铁缺乏，不能满足正常红细胞生成的需要，影响了<code>血红素</code>的合成所致的<code>低色素性贫血</code>。</li>
+<li>据统计，我国儿童缺铁的发生率目前为<code>60％</code>，仍非常严峻。</li>
+<li>当缺铁严重贫血进展加快时，<code>皮肤、黏膜苍白是最为突出的临床表现</code>。</li>
+<li>缺铁性贫血治疗原则有二，即<code>消除病因及采用铁剂治疗</code>。如采用铁剂治疗有效，3～10天内即见<code>网织细胞增高</code>，血红蛋白也相应增高。缺铁性贫血纠正后继续服用小剂量铁剂<code>3～6个月以补充铁的储备</code>。   </li>
+</ol>
+<h4 id="第三节-出血性疾病"><a href="#第三节-出血性疾病" class="headerlink" title="第三节  出血性疾病"></a>第三节  出血性疾病</h4><ol>
+<li>特发性血小板减少性紫癜是一种<code>免疫性血小板破坏过多</code>造成的疾病。</li>
+<li><code>糖皮质激素</code>是治疗特发性血小板减少性紫癜的首选药物。</li>
+<li>弥漫性血管内凝血(DIC)的特点是体内有血小板聚集，病理性凝血酶生成。纤维蛋白在微血管中沉积，形成<code>广泛性微血栓</code>。在此过程中，消耗了大量<code>血小板和凝血因子</code>使凝血活性减低。同时，通过内激活途径引发<code>继发性纤溶亢进</code>。</li>
+<li>DIC的诊断若肯定，原则上应使用<code>肝素抗凝</code>治疗。     </li>
+</ol>
+<h3 id="泌尿与男性生殖系统疾病"><a href="#泌尿与男性生殖系统疾病" class="headerlink" title="泌尿与男性生殖系统疾病"></a>泌尿与男性生殖系统疾病</h3><h4 id="第一节-肾小球肾炎"><a href="#第一节-肾小球肾炎" class="headerlink" title="第一节  肾小球肾炎"></a>第一节  肾小球肾炎</h4><ol>
+<li>急性肾小球肾炎多见于<code>链球菌感染</code>后。</li>
+<li><code>肾小球性血尿</code>是急性肾小球肾炎的主要首发症状。</li>
+<li>慢性肾小球肾炎简称慢性肾炎，基本临床表现是<code>蛋白尿、血尿、水肿、高血压</code>。</li>
+</ol>
+<h4 id="第二节-肾病综合征"><a href="#第二节-肾病综合征" class="headerlink" title="第二节  肾病综合征"></a>第二节  肾病综合征</h4><ol>
+<li>肾病综合征是以<code>大量蛋白尿、低蛋白血症、全身水肿和高脂血症</code>为临床特点的临床综合征。</li>
+<li><code>糖皮质激素</code>是治疗肾病综合症的主要药物。起始量要足，见效后要缓，缓解后以最小有效量维持0.5～1年以上。    </li>
+</ol>
+<h4 id="第七节-肾功能衰竭"><a href="#第七节-肾功能衰竭" class="headerlink" title="第七节  肾功能衰竭"></a>第七节  肾功能衰竭</h4><ol>
+<li>急性肾功能衰竭是由各种疾病导致肾功能急剧损伤，以致<code>代谢产物积聚</code>，水、电解质和酸碱代谢紊乱的临床综合征。</li>
+<li>慢性肾功能衰竭由于肾脏不能从尿中排出代谢产物和有毒物质，引起<code>全身中毒症状</code>及其临床表现，临床诊断为尿毒症。</li>
+<li>维持水、电解质和酸碱平衡十分重要。低钠、低钙、高钾、高磷及低氯、高镁均应纠正，危重的高血钾和水中毒，需紧急<code>透析治疗</code>。    </li>
+</ol>
+<h3 id="内分泌代谢性疾病"><a href="#内分泌代谢性疾病" class="headerlink" title="内分泌代谢性疾病"></a>内分泌代谢性疾病</h3><h4 id="十五节-糖尿病"><a href="#十五节-糖尿病" class="headerlink" title="十五节  糖尿病"></a>十五节  糖尿病</h4><ol>
+<li>糖尿病临床表现：糖代谢紊乱表现－－典型病人有<code>多尿、多饮、多食、消瘦(体重减少)为特点的&quot;三多一少&quot;症状</code>。</li>
+<li><code>蝶形红斑</code>是SLE(系统性红斑狼疮)的特征性改变。</li>
+<li>SLE的治疗：全身症状严重伴有严重伴内脏损害或广泛皮疹者用<code>糖皮质激素及免疫抑制剂</code>。    </li>
+</ol>
+<h2 id="外科"><a href="#外科" class="headerlink" title="外科"></a>外科</h2><h3 id="外科学基础"><a href="#外科学基础" class="headerlink" title="外科学基础"></a>外科学基础</h3><h4 id="第一节-无菌术"><a href="#第一节-无菌术" class="headerlink" title="第一节  无菌术"></a>第一节  无菌术</h4><ol>
+<li>灭菌的主要方法：<code>高温--高压蒸汽法、煮沸法、火烧法</code>。</li>
+<li>煮沸法：适用于金属器械、玻璃制品及橡胶类等物品。在水中煮沸至100℃并持续15～20分钟，可杀灭一般细菌。<code>带芽孢的细菌，如破伤风、气性坏疽杆菌，每日至少煮1～2小时，连续3天才能被彻底杀灭</code>。    </li>
+</ol>
+<h4 id="第二节-外科水、电解质和酸碱平衡失调的处理"><a href="#第二节-外科水、电解质和酸碱平衡失调的处理" class="headerlink" title="第二节  外科水、电解质和酸碱平衡失调的处理"></a>第二节  外科水、电解质和酸碱平衡失调的处理</h4><ol>
+<li>体液的主要成分是<code>水和电解质</code>，体液的量与性别、年龄及胖瘦有关。<code>成年男性总体液量一般为体重的60%，女性体内的脂肪含量较高，故体液占体重的50%</code>。</li>
+<li>总体液量包括<code>细胞内液和细胞外液</code>。细胞内液绝大部分存在于骨骼肌中，<code>男性约占体重的40%，女性约占35%。细胞外液则男女均沾体重的29%。</code>细胞外液中又可分为组织间液和血浆两部分。<code>血浆量约占体重的5%</code>，组织间液约占体重的15%。</li>
+<li><code>低滲性缺水：血清钠浓度&lt;135mmol/L</code>。</li>
+<li><code>高滲性缺水：血清钠浓度&gt;150mmol/L</code>。</li>
+<li><code>低钾血症：血清钾浓度低于3.5mmol/L</code>。</li>
+<li><code>高钾血症：血清钾浓度超过5.5mmol/L</code>。</li>
+</ol>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href= "/2016/03/05/2016-03-05--在Ubuntu_Debian-上装Pillow/" title= 在Ubuntu/Debian 上装Pillow >
+                    <span>Next Post</span>
+                    <span>在Ubuntu/Debian 上装Pillow</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href= "/2016/02/28/2016-02-28--Django-常用对象路径/" title= Django 常用对象路径 >
+                    <span>Previous Post</span>
+                    <span>Django 常用对象路径</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <script data-isso= http://comment.toonow.cc/ src= http://comment.toonow.cc/js/embed.min.js></script>
+    <section id="isso-thread"></section>
+    
+
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:toono@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/ToonoW" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+            
+                <a href="//twitter.com/toono_w" class="iconfont-archer twitter" target="_blank" title="twitter"></a>
+            
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#内科"><span class="toc-number">1.</span> <span class="toc-text">内科</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常见症状"><span class="toc-number">1.1.</span> <span class="toc-text">常见症状</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#第一节-发热"><span class="toc-number">1.1.1.</span> <span class="toc-text">第一节  发热</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第四节-发绀"><span class="toc-number">1.1.2.</span> <span class="toc-text">第四节  发绀</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第六节-咳嗽和咳痰"><span class="toc-number">1.1.3.</span> <span class="toc-text">第六节  咳嗽和咳痰</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第八节-呼吸困难"><span class="toc-number">1.1.4.</span> <span class="toc-text">第八节  呼吸困难</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#体格检查"><span class="toc-number">1.2.</span> <span class="toc-text">体格检查</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#第二节-一般检查"><span class="toc-number">1.2.1.</span> <span class="toc-text">第二节  一般检查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第三节-头部检查"><span class="toc-number">1.2.2.</span> <span class="toc-text">第三节  头部检查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第四节-颈部检查"><span class="toc-number">1.2.3.</span> <span class="toc-text">第四节  颈部检查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第五节-胸部检查"><span class="toc-number">1.2.4.</span> <span class="toc-text">第五节  胸部检查</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实验室检查"><span class="toc-number">1.3.</span> <span class="toc-text">实验室检查</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#第一节-临床一般检查"><span class="toc-number">1.3.1.</span> <span class="toc-text">第一节  临床一般检查</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#呼吸系统疾病"><span class="toc-number">1.4.</span> <span class="toc-text">呼吸系统疾病</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#第三节-慢性支气管炎"><span class="toc-number">1.4.1.</span> <span class="toc-text">第三节  慢性支气管炎</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第四节-慢性阻塞性肺病"><span class="toc-number">1.4.2.</span> <span class="toc-text">第四节  慢性阻塞性肺病</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第五节-慢性肺源性心脏病"><span class="toc-number">1.4.3.</span> <span class="toc-text">第五节  慢性肺源性心脏病</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第六节-支气管哮喘"><span class="toc-number">1.4.4.</span> <span class="toc-text">第六节  支气管哮喘</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第八节-呼吸衰竭"><span class="toc-number">1.4.5.</span> <span class="toc-text">第八节  呼吸衰竭</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环系统疾病"><span class="toc-number">1.5.</span> <span class="toc-text">循环系统疾病</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#第一节-心力衰竭"><span class="toc-number">1.5.1.</span> <span class="toc-text">第一节  心力衰竭</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第二节-高血压病"><span class="toc-number">1.5.2.</span> <span class="toc-text">第二节  高血压病</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第四节-冠心病"><span class="toc-number">1.5.3.</span> <span class="toc-text">第四节  冠心病</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#消化系统疾病"><span class="toc-number">1.6.</span> <span class="toc-text">消化系统疾病</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#第二节-胃、十二指肠疾病"><span class="toc-number">1.6.1.</span> <span class="toc-text">第二节  胃、十二指肠疾病</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第五节-肝脏疾病"><span class="toc-number">1.6.2.</span> <span class="toc-text">第五节  肝脏疾病</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第八节-胰腺疾病"><span class="toc-number">1.6.3.</span> <span class="toc-text">第八节  胰腺疾病</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#血液与造血系统疾病"><span class="toc-number">1.7.</span> <span class="toc-text">血液与造血系统疾病</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#第一节-红细胞系统疾病"><span class="toc-number">1.7.1.</span> <span class="toc-text">第一节  红细胞系统疾病</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第三节-出血性疾病"><span class="toc-number">1.7.2.</span> <span class="toc-text">第三节  出血性疾病</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#泌尿与男性生殖系统疾病"><span class="toc-number">1.8.</span> <span class="toc-text">泌尿与男性生殖系统疾病</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#第一节-肾小球肾炎"><span class="toc-number">1.8.1.</span> <span class="toc-text">第一节  肾小球肾炎</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第二节-肾病综合征"><span class="toc-number">1.8.2.</span> <span class="toc-text">第二节  肾病综合征</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第七节-肾功能衰竭"><span class="toc-number">1.8.3.</span> <span class="toc-text">第七节  肾功能衰竭</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内分泌代谢性疾病"><span class="toc-number">1.9.</span> <span class="toc-text">内分泌代谢性疾病</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#十五节-糖尿病"><span class="toc-number">1.9.1.</span> <span class="toc-text">十五节  糖尿病</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#外科"><span class="toc-number">2.</span> <span class="toc-text">外科</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#外科学基础"><span class="toc-number">2.1.</span> <span class="toc-text">外科学基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#第一节-无菌术"><span class="toc-number">2.1.1.</span> <span class="toc-text">第一节  无菌术</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第二节-外科水、电解质和酸碱平衡失调的处理"><span class="toc-number">2.1.2.</span> <span class="toc-text">第二节  外科水、电解质和酸碱平衡失调的处理</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header sidebar-header-show-archive">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 35 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/06</span><a class="archive-post-title" href= "/2017/01/06/2017-01-06-Perfect-Assistant-让你的服务端开发更便捷/" >Perfect Assistant 让你的服务器开发更便捷</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/04</span><a class="archive-post-title" href= "/2017/01/04/2017-01-04-PyQt4-Box-Layout-布局/" >PyQt4 Box Layout 布局</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2016 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/27</span><a class="archive-post-title" href= "/2016/12/27/2016-12-27-(译)PyQt_-Threading-线程基础教程/" >(译)PyQt Threading 线程基础教程</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/20</span><a class="archive-post-title" href= "/2016/12/20/2016-12-20-(译)Python-多线程-socket-代码实战/" >(译)Python 多线程 socket 代码实战</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/18</span><a class="archive-post-title" href= "/2016/12/18/2016-12-18-swift学习笔记【1】/" >swift学习笔记【1】</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/12</span><a class="archive-post-title" href= "/2016/12/12/2016-12-12-Python开发周记【一】/" >Python开发周记【一】</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/02</span><a class="archive-post-title" href= "/2016/12/02/2016-12-02-Core-Bluetooth-编程指南(二)-Core-Bluetooth-概览/" >Core Bluetooth 编程指南(二)  Core Bluetooth 概览</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/29</span><a class="archive-post-title" href= "/2016/11/29/2016-11-29-Core-Bluetooth-编程指南(一)-基本介绍/" >Core Bluetooth 编程指南(一)  基本介绍</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/14</span><a class="archive-post-title" href= "/2016/11/14/2016-11-14-URLSession文档学习/" >NSURLSession阅读文档笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/23</span><a class="archive-post-title" href= "/2016/08/23/2016-08-23--从一组数中寻找第k大的元素/" >从一组数中寻找第k大的元素</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/10</span><a class="archive-post-title" href= "/2016/08/10/2016-08-10--(译)为什么SDWebImage比其他的图片下载组件更好_/" >(译)为什么SDWebImage比其他的图片下载组件更好</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/31</span><a class="archive-post-title" href= "/2016/05/31/2016-05-31--(译)UITableViewCell中嵌套UICollectionView/" >(译)UITableViewCell中嵌套UICollectionView</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/08</span><a class="archive-post-title" href= "/2016/04/08/2016-04-08-读《人月神话》/" >读《人月神话》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/06</span><a class="archive-post-title" href= "/2016/03/06/2016-03-06--Flask-速记/" >Flask 速记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/05</span><a class="archive-post-title" href= "/2016/03/05/2016-03-05--在Ubuntu_Debian-上装Pillow/" >在Ubuntu/Debian 上装Pillow</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/03</span><a class="archive-post-title" href= "/2016/03/03/2016-03-03--临床医学概要/" >临床医学概要</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/28</span><a class="archive-post-title" href= "/2016/02/28/2016-02-28--Django-常用对象路径/" >Django 常用对象路径</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/11</span><a class="archive-post-title" href= "/2016/02/11/2016-02-11--写给大家看的设计书-读书笔记/" >写给大家看的设计书 读书笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/10</span><a class="archive-post-title" href= "/2016/02/10/2016-02-10--Django-Database/" >Django Database Setting</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/08</span><a class="archive-post-title" href= "/2016/02/08/2016-02-08--Django-杂记/" >Django 杂记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/29</span><a class="archive-post-title" href= "/2016/01/29/2016-01-29--@property-参数/" >property 参数</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/28</span><a class="archive-post-title" href= "/2016/01/28/2016-01-28--Django-开发实用对象/" >Django 开发实用对象</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/28</span><a class="archive-post-title" href= "/2016/01/28/2016-01-28-Github的git的功能理解/" >Github的git功能的理解</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/28</span><a class="archive-post-title" href= "/2016/01/28/2016-01-28-Python-学习记录/" >Python 学习记录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2016/01/25/2016-01-25-Flask-web开发环境准备/" >Flask web开发环境准备</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2016/01/25/2016-01-25-Flask项目基本目录结构/" >Flask 项目基本目录结构</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/20</span><a class="archive-post-title" href= "/2016/01/20/2016-01-20-内存管理/" >OC内存管理</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2015 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/16</span><a class="archive-post-title" href= "/2015/12/16/2015-12-16-iOS开发简单全流程/" >iOS开发简单全流程</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2015/12/13/2015-12-13-App-发布过程/" >iOS App 发布过程</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/09</span><a class="archive-post-title" href= "/2015/12/09/2015-12-09-iOS-第三方收集/" >iOS 第三方收集</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/07</span><a class="archive-post-title" href= "/2015/12/07/2015-12-07-Homebrew-使用记录/" >Homebrew 使用记录</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/07</span><a class="archive-post-title" href= "/2015/12/07/2015-12-07-资源收集/" >资源收集</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/06</span><a class="archive-post-title" href= "/2015/12/06/2015-12-06-iOS开发周记-1/" >iOS开发周记 1</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/04</span><a class="archive-post-title" href= "/2015/12/04/2015-12-04-Python-正则表达式/" >Python 正则表达式</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/04</span><a class="archive-post-title" href= "/2015/12/04/2015-12-04-Python-面向对象/" >Python 面向对象学习笔记</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+
