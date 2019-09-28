@@ -19,6 +19,7 @@ jobs:
     - run: npm install
     - run: npm install -g hexo
     - run: hexo generate
+    - run: ls -al public/
     - name: Deploy
       uses: maxheld83/ghpages@v0.2.1
       env:
