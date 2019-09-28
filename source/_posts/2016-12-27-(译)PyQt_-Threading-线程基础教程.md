@@ -1,4 +1,5 @@
 ---
+date: 2016-12-27
 title: (译)PyQt Threading 线程基础教程
 category: Python
 layout: post

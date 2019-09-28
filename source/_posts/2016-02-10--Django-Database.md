@@ -1,4 +1,5 @@
 ---
+date: 2016-02-10
 layout: post
 title: Django Database Setting
 category: Python

@@ -1,4 +1,5 @@
 ---
+date: 2016-03-05
 layout: post
 title: 在Ubuntu/Debian 上装Pillow
 category: Python

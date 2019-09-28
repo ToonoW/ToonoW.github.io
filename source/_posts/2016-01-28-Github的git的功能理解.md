@@ -1,4 +1,5 @@
 ---
+date: 2016-01-28
 layout: post
 title: Github的git功能的理解
 category: Other

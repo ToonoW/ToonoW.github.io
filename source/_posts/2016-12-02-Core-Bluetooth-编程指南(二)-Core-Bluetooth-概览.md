@@ -1,4 +1,5 @@
 ---
+date: 2016-12-02
 title: Core Bluetooth 编程指南(二)  Core Bluetooth 概览
 layout: post
 category: iOS

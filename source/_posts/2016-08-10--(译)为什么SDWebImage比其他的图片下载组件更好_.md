@@ -1,4 +1,5 @@
 ---
+date: 2016-08-10
 title: (译)为什么SDWebImage比其他的图片下载组件更好
 layout: post
 category: iOS

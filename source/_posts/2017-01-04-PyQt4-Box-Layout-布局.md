@@ -1,4 +1,5 @@
 ---
+date: 2017-01-04
 title: PyQt4 Box Layout 布局
 layout: post
 category: Python
