@@ -16,9 +16,11 @@ jobs:
         submodules: true
     - name: Use Node.js
       uses: actions/setup-node@master
-    - run: hexo generator
+    - run: npm install
+    - run: npm install -g hexo
+    - run: hexo generate
     - name: Deploy
       uses: maxheld83/ghpages@v0.2.1
       env:
         BUILD_DIR: "public/"
-      secrets: ["GH_PAT"]
+        GH_PAT: ${{ secrets.GH_PAT }}
